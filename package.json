@@ -1,0 +1,24 @@
+{
+    "name":"dynamic-sankey",
+    "version": "0.0.0",
+    "description": "Customizable dynamic Sankey diagram",
+    "dependencies": {
+        "d3": "4.5.0"
+    },
+    "devDependencies": {
+
+    },
+    "scripts": { 
+
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ORNL-AMO/Dynamic-Sankey.git"
+    },
+    "author": "Michael Whitmer",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/ORNL-AMO/Dynamic-Sankey/issues"
+    },
+    "homepage": "https://github.com/ORNL-AMO/Dynamic-Sankey#readme"
+}
