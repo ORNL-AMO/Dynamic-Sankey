@@ -1,5 +1,8 @@
 # Dynamic-Sankey
 
+## Installation:
+Run `npm install`
+
 ## Description:
 
 A Sankey Diagram is often used to show flow through a system.
