@@ -1,4 +1,4 @@
-# Dynamic-Sankey [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ORNL-AMO/Dynamic-Sankey/blob/master/LICENSE.txt)
+# Dynamic-Sankey [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ORNL-AMO/Dynamic-Sankey/blob/master/LICENSE)
 
 ## Installation:
 Run `npm install`
