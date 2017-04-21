@@ -6,12 +6,19 @@
         "@angular/common": "^2.4.0",
         "@angular/core": "^2.4.0",
         "@angular/platform-browser": "^2.4.0",
+        "bootstrap": "^4.0.0-alpha.6",
         "d3": "4.5.0",
+        "d3-ng2-service": "1.6.0",
         "rxjs": "^5.0.1",
         "zone.js": "^0.7.2"
     },
     "devDependencies": {
-
+        "@types/lodash": "^4.14.52",
+        "lodash.foreach": "^4.5.0",
+        "lodash.keys": "^4.2.0",
+        "ts-node": "^0.13.2",
+        "tslint": "~4.4.2",
+        "typescript": "~2.2.1"
     },
     "repository": {
         "type": "git",
