@@ -3,6 +3,8 @@
     "version": "0.0.0",
     "description": "Customizable dynamic Sankey diagram",
     "dependencies": {
+        "@angular/core": "^2.4.0",
+        "@angular/platform-browser": "^2.4.0",
         "d3": "4.5.0"
     },
     "devDependencies": {
