@@ -12,15 +12,18 @@ const width = 1950,
 const baseSize = 300;
 
 makeBtn.addEventListener('click', function(event){
-    makeSankey();
+  console.log('Make Good');
+  makeSankey();
 });
 
 closeBtn.addEventListener('click', function(event){
-    closeSankey();
+  console.log('Close Good');
+  closeSankey();
 });
 
 zoomBtn.addEventListener('click', function(event){
-    zoom();
+  console.log('Zoom Good');
+  zoom();
 });
 
 
