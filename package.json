@@ -9,6 +9,7 @@
     "d3": "4.5.0"
   },
   "devDependencies": {
+    "webpack": "^2.4.1"
   },
   "repository": {
     "type": "git",

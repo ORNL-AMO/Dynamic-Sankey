@@ -22,7 +22,7 @@ closeBtn.addEventListener('click', function(event){
 
 zoomBtn.addEventListener('click', function(event){
   console.log('Zoom Good');
-  zoom();
+  zoom('body');
 });
 
   function closeSankey(location){
