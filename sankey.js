@@ -1,10 +1,9 @@
-var d3;
-
+const d3 = require('d3');
 var svg;
 
-var makeBtn = document.getElementById('make')
-var closeBtn = document.getElementById('close');
-var zoomBtn = document.getElementById('zoom');
+var makeBtn = document.getElementById("make");
+var closeBtn = document.getElementById("close");
+var zoomBtn = document.getElementById("zoom");
 
 const width = 1950,
       height = 1200;
@@ -13,19 +12,18 @@ const baseSize = 300;
 
 makeBtn.addEventListener('click', function(event){
   console.log('Make Good');
-  makeSankey();
+  makeSankey('body');
 });
 
 closeBtn.addEventListener('click', function(event){
   console.log('Close Good');
-  closeSankey();
+  closeSankey('body');
 });
 
 zoomBtn.addEventListener('click', function(event){
   console.log('Zoom Good');
   zoom();
 });
-
 
   function closeSankey(location){
     //Remove Sankey
