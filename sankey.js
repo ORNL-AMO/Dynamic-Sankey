@@ -1,51 +1,51 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
-import { Losses } from '../../shared/models/phast';
-import * as _ from 'lodash';
-
-declare var d3: any;
-
+const d3 = require('d3');
 var svg;
+
+var makeBtn = document.getElementById("make");
+var closeBtn = document.getElementById("close");
+var zoomBtn = document.getElementById("zoom");
 
 const width = 1950,
       height = 1200;
 
 const baseSize = 300;
 
-@Component({
-  selector: 'app-sankey',
-  templateUrl: 'sankey.component.html',
-  styleUrls: ['sankey.component.css']
-})
+makeBtn.addEventListener('click', function(event){
+  console.log('Make Good');
+  makeSankey('body');
+});
 
-export class SankeyComponent implements OnInit {
+closeBtn.addEventListener('click', function(event){
+  console.log('Close Good');
+  closeSankey('body');
+});
 
-  constructor() {
-  }
+zoomBtn.addEventListener('click', function(event){
+  console.log('Zoom Good');
+  zoom('body');
+});
 
-  ngOnInit() {
-  }
-
-  closeSankey(location){
+  function closeSankey(location){
     //Remove Sankey
     d3.select(location).selectAll('svg').remove();
   }
 
-  zoom(location){
+  function zoom(location){
     d3.select(location).selectAll('svg')
       .attr("width", "100%")
       .attr("height", "700");
   }
 
-  unZoom(){
+  function unZoom(){
     svg
       .attr("width", "900")
       .attr("height", "600")
   }
 
-  makeSankey(location){
+  function makeSankey(location){
 
     //Remove  all Sankeys
-    d3.select(location).selectAll('svg').remove();
+    closeSankey();
 
     var nodes = [
 
@@ -102,7 +102,7 @@ export class SankeyComponent implements OnInit {
       .append("g")
       .call(findColor);
 
-    this.drawFurnace();
+    drawFurnace();
 
     function calcSankey() {
       var alterVal = 0, change;
@@ -615,7 +615,7 @@ export class SankeyComponent implements OnInit {
     }
   }
 
-  drawFurnace(){
+  function drawFurnace(){
     var furnace = svg.append("g")
       .append("polygon")
       .attr("points", function(){
@@ -624,4 +624,4 @@ export class SankeyComponent implements OnInit {
       .style("fill", "#bae4ce")
       .style("stroke", "black");
   }
-}
+
