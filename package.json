@@ -2,16 +2,13 @@
     "name":"dynamic-sankey",
     "version": "0.0.0",
     "description": "Customizable dynamic Sankey diagram",
+    "scripts" {
+        "bundle": "./node_modules/.bin/webpack sankey.js -o bundle.js"
     "dependencies": {
-        "@angular/common": "^2.4.0",
-        "@angular/core": "^2.4.0",
-        "@angular/platform-browser": "^2.4.0",
         "d3": "4.5.0",
-        "rxjs": "^5.0.1",
-        "zone.js": "^0.7.2"
     },
     "devDependencies": {
-
+        "webpack": "2.4.1"
     },
     "repository": {
         "type": "git",
