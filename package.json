@@ -6,7 +6,7 @@
         "bundle": "./node_modules/.bin/webpack sankey.js -o bundle.js"
     },
     "dependencies": {
-        "d3": "4.5.0",
+        "d3": "4.5.0"
     },
     "devDependencies": {
         "webpack": "2.4.1"

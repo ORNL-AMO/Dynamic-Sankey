@@ -367,261 +367,273 @@ export class SankeyComponent implements OnInit {
 
     //Draw nodes to the svg
     var node = svg.selectAll('.node')
-      .data(nodes)
-      .enter()
-      .append('g')
-      .append("polygon")
-      .attr('class', 'node');
+        .data(nodes)
+        .enter()
+        .append('g')
+        .append("polygon")
+        .attr('class', 'node');
 
     var nodes_text = svg.selectAll(".nodetext")
-      .data(nodes)
-      .enter()
-      .append("text")
-      .attr("text-anchor", "middle")
-      .attr("dx", function(d){
-        if(d.input){
-          return d.x - 70;
-        }
-        else if(d.usefulOutput){
-          return d.x + (d.displaySize*.7)  + 100;
-        }
-        else {
-          return d.x;
-        }
-      })
-      .attr("dy", function(d){
-        if(d.input || d.usefulOutput){
-          return d.y + (d.displaySize/2);
-        }
-        else {
-          if (d.top) {
-            return d.y - 100;
+        .data(nodes)
+        .enter()
+        .append("text")
+        .attr("text-anchor", "middle")
+        .attr("dx", function(d){
+          if(d.input){
+            return d.x - 70;
+          }
+          else if(d.usefulOutput){
+            return d.x + (d.displaySize*.7)  + 100;
           }
           else {
-            return d.y + 60;
+            return d.x;
           }
-        }
-      })
-      .text(function(d) {
-        if(!d.inter) {
-          return d.name;
-        }
-      });
+        })
+        .attr("dy", function(d){
+          if(d.input || d.usefulOutput){
+            return d.y + (d.displaySize/2);
+          }
+          else {
+            if (d.top) {
+              return d.y - 120;
+            }
+            else {
+              return d.y + 60;
+            }
+          }
+        })
+        .text(function(d) {
+          if(!d.inter) {
+            return d.name;
+          }
+        })
+        .style("font-size", "30px");
 
     var nodes_units = svg.selectAll(".nodetext")
-      .data(nodes)
-      .enter()
-      .append("text")
-      .attr("text-anchor", "middle")
-      .attr("dx", function(d){
-        if(d.input){
-          return d.x - 70;
-        }
-        else if(d.usefulOutput){
-          return d.x + (d.displaySize*.7)  + 100;
-        }
-        else {
-          return d.x;
-        }
-      })
-      .attr("dy", function(d){
-        if(d.input || d.usefulOutput){
-          return d.y + (d.displaySize/2) + 60;
-        }
-        else {
-          if (d.top) {
-            return d.y - 30;
+        .data(nodes)
+        .enter()
+        .append("text")
+        .attr("text-anchor", "middle")
+        .attr("dx", function(d){
+          if(d.input){
+            return d.x - 70;
+          }
+          else if(d.usefulOutput){
+            return d.x + (d.displaySize*.7)  + 100;
           }
           else {
-            return d.y + 130;
+            return d.x;
           }
-        }
-      })
-      .text(function(d) {
-        if(!d.inter) {
-          return "Btu/Hr.";
-        }
-      });
+        })
+        .attr("dy", function(d){
+          if(d.input || d.usefulOutput){
+            return d.y + (d.displaySize/2) + 95;
+          }
+          else {
+            if (d.top) {
+              return d.y - 20;
+            }
+            else {
+              return d.y + 160;
+            }
+          }
+        })
+        .text(function(d) {
+          if(!d.inter) {
+            return "Btu/Hr.";
+          }
+        })
+        .style("font-size", "30px");
 
     nodes.forEach(function(d, i){
       var node_val  = d, i = i;
       if(!node_val.inter) {
         svg.append('foreignObject')
-          .attr("id", "inputObject")
-          .attr("x", function () {
-            if (node_val.input) {
-              return node_val.x - 120;
-            }
-            else if (node_val.usefulOutput) {
-              return d.x + (d.displaySize*.7) + 50;
-            }
-            else {
-              return node_val.x - 50;
-            }
-          })
-          .attr("y", function () {
-            if (node_val.input || node_val.usefulOutput) {
-              return (node_val.y + (node_val.displaySize / 2)) + 10;
-            }
-            else if (node_val.top) {
-              return node_val.y - 80;
-            }
-            else {
-              return node_val.y + 80;
-            }
-          })
-          .attr("width", 100)
-          .attr("height", 50)
-          .append("xhtml:sankey-diagram")
-          .append("input")
-          .data(nodes)
-          .attr("type", "text")
-          .attr("id", node_val.name)
-          .attr("value", function(){
-            var format = d3.format(",");
-            return format(node_val.value);
-          })
-          .style("width", "100px")
-          .on("change", function(){
-            if(isNaN(parseFloat(this.value))){
-              nodes[i].value = 0;
-            }
-            else{
-              nodes[i].value = parseFloat(this.value.replace(new RegExp(",", "g"), ""));
-            }
-            calcSankey();
-            updateColors();
-            link
-              .attr("d", function(d){
-                return makeLinks(d)
-              })
-              .style("stroke-width", function(d){
-                //returns a links width equal to the target's value
-                return nodes[d.target].displaySize;
-              })
-              .attr("marker-end", function (d) {
-                return getEndMarker(d);
-              });
-            link
-              .style("stroke", function(d, i){
-                return "url(" + window.location + "#linear-gradient-" + i + ")"
-              });
-            nodes_text
-              .attr("dx", function(d){
-                if(d.input){
-                  return d.x - 70;
-                }
-                else if(d.usefulOutput){
-                  return d.x + (d.displaySize*.7)  + 100;
-                }
-                else {
-                  return d.x;
-                }
-              })
-              .attr("dy", function(d){
-                if(d.input || d.usefulOutput){
-                  return d.y + (d.displaySize/2);
-                }
-                else {
-                  if (d.top) {
-                    return d.y - 100;
-                  }
-                  else {
-                    return d.y + 60;
-                  }
-                }
-              });
-            nodes_units
-              .attr("dx", function(d){
-                if(d.input){
-                  return d.x - 70;
-                }
-                else if(d.usefulOutput){
-                  return d.x + (d.displaySize*.7)  + 100;
-                }
-                else {
-                  return d.x;
-                }
-              })
-              .attr("dy", function(d){
-                if(d.input || d.usefulOutput){
-                  return d.y + (d.displaySize/2) + 60;
-                }
-                else {
-                  if (d.top) {
-                    return d.y - 30;
-                  }
-                  else {
-                    return d.y + 130;
-                  }
-                }
-              });
+            .attr("id", "inputObject")
+            .attr("x", function () {
+              if (node_val.input) {
+                return node_val.x - 150;
+              }
+              else if (node_val.usefulOutput) {
+                return d.x + (d.displaySize*.7) + 30;
+              }
+              else {
+                return node_val.x - 70;
+              }
+            })
+            .attr("y", function () {
+              if (node_val.input || node_val.usefulOutput) {
+                return (node_val.y + (node_val.displaySize / 2)) + 10;
+              }
+              else if (node_val.top) {
+                return node_val.y - 100;
+              }
+              else {
+                return node_val.y + 80;
+              }
+            })
+            .style("font-size", "30px")
+            .attr("width", 100)
+            .attr("height", 50)
+            .append("xhtml:sankey-diagram")
+            .append("input")
+            .data(nodes)
+            .attr("type", "text")
+            .attr("id", node_val.name)
+            .attr("value", function(){
+              var format = d3.format(",");
+              return format(node_val.value);
+            })
+            .style("width", "140px")
+            .on("change", function(){
+              if(isNaN(parseFloat(this.value))){
+                nodes[i].value = 0;
+              }
+              else if((i != 0) && (this.value > (nodes[i].value + nodes[15].value))){
+                //nothing happens here
+              }
+              else{
+                nodes[i].value = parseFloat(this.value.replace(new RegExp(",", "g"), ""));
+              }
+              calcSankey();
+              updateColors();
+              link
+                  .attr("d", function(d){
+                    return makeLinks(d)
+                  })
+                  .style("stroke-width", function(d){
+                    //returns a links width equal to the target's value
+                    return nodes[d.target].displaySize;
+                  })
+                  .attr("marker-end", function (d) {
+                    return getEndMarker(d);
+                  });
+              link
+                  .style("stroke", function(d, i){
+                    return "url(" + window.location + "#linear-gradient-" + i + ")"
+                  });
 
-            changePlaceHolders();
-          });
+
+              nodes_text
+                  .attr("dx", function(d){
+                    if(d.input){
+                      return d.x - 70;
+                    }
+                    else if(d.usefulOutput){
+                      return d.x + (d.displaySize*.7)  + 100;
+                    }
+                    else {
+                      return d.x;
+                    }
+                  })
+                  .attr("dy", function(d){
+                    if(d.input || d.usefulOutput){
+                      return d.y + (d.displaySize/2);
+                    }
+                    else {
+                      if (d.top) {
+                        return d.y - 120;
+                      }
+                      else {
+                        return d.y + 60;
+                      }
+                    }
+                  })
+                  .style("font-size", "30px");
+
+
+              nodes_units
+                  .attr("dx", function(d){
+                    if(d.input){
+                      return d.x - 70;
+                    }
+                    else if(d.usefulOutput){
+                      return d.x + (d.displaySize*.7)  + 100;
+                    }
+                    else {
+                      return d.x;
+                    }
+                  })
+                  .attr("dy", function(d){
+                    if(d.input || d.usefulOutput){
+                      return d.y + (d.displaySize/2) + 95;
+                    }
+                    else {
+                      if (d.top) {
+                        return d.y - 20;
+                      }
+                      else {
+                        return d.y + 160;
+                      }
+                    }
+                  })
+                  .style("font-size", "30px");
+
+              changePlaceHolders();
+            });
       }
     });
 
 
     function changePlaceHolders(){
       svg.selectAll("input")
-        .attr("value", function(d,i){
-          var format = d3.format(",");
-          if(i == 8){
-            return format(nodes[15].value);
-          }
-          else {
-            return format(nodes[i * 2].value);
-          }
-        })
-        .each(function(d, i){
-          var format = d3.format(",");
-          if(i == 8){
-            this.value = format(nodes[15].value);
-          }
-          else {
-            this.value = format(nodes[i * 2].value);
-          }
-        });
-      svg.selectAll("foreignObject")
-        .data(nodes)
-        .attr("x", function (d, i) {
-          if(i == 8){
-            return nodes[15].x + (nodes[15].displaySize*.7) + 50;
-          }
-          else if(nodes[i * 2].input){
-            return nodes[i * 2].x - 120;
-          }
-          else{
-            return nodes[i * 2].x - 50;
-          }
-        })
-        .attr("y", function (d, i) {
-          if (nodes[i].input){
-            return (nodes[i * 2].y + (nodes[i * 2].displaySize / 2)) + 10;
-          }
-          else if(i == 8 ){
-            return (nodes[15].y + (nodes[15].displaySize / 2)) + 10;
-          }
-          else{
-            if (nodes[i * 2].top) {
-              return nodes[i * 2].y - 80;
+          .attr("value", function(d,i){
+            var format = d3.format(",");
+            if(i == 8){
+              return format(nodes[15].value);
             }
             else {
-              return nodes[i * 2].y + 80;
+              return format(nodes[i * 2].value);
             }
-          }
-        });
+          })
+          .each(function(d, i){
+            var format = d3.format(",");
+            if(i == 8){
+              this.value = format(nodes[15].value);
+            }
+            else {
+              this.value = format(nodes[i * 2].value);
+            }
+          });
+      svg.selectAll("foreignObject")
+          .data(nodes)
+          .attr("x", function (d, i) {
+            if(i == 8){
+              return nodes[15].x + (nodes[15].displaySize*.7) + 30;
+            }
+            else if(nodes[i * 2].input){
+              return nodes[i * 2].x - 150;
+            }
+            else{
+              return nodes[i * 2].x - 70;
+            }
+          })
+          .attr("y", function (d, i) {
+            if (nodes[i].input){
+              return (nodes[i * 2].y + (nodes[i * 2].displaySize / 2)) + 10;
+            }
+            else if(i == 8 ){
+              return (nodes[15].y + (nodes[15].displaySize / 2)) + 10;
+            }
+            else{
+              if (nodes[i * 2].top) {
+                return nodes[i * 2].y - 100;
+              }
+              else {
+                return nodes[i * 2].y + 80;
+              }
+            }
+          });
     }
   }
 
   drawFurnace(){
     var furnace = svg.append("g")
-      .append("polygon")
-      .attr("points", function(){
-        return (620-100) + "," + ((height/2)-500) + "," + (620-150) + "," + ((height/2)-500) + "," + (620-150) + "," + ((height/2)-350) + "," + 250 + "," + ((height/2)-350) + "," + 250 + "," + ((height/2)+350) + "," + 1400 + "," +  ((height/2)+350) + "," + 1400 + "," + ((height/2)-350) + "," + (620+150) + "," + ((height/2)-350) + "," + (620+150) + "," + ((height/2)-500) + "," + (620+100) + "," + ((height/2)-500) + "," + (620+100) + "," + ((height/2)-300) + "," + (1400-50) + "," + ((height/2)-300) + "," + (1400-50) + "," + ((height/2)+300) + "," + 300 + "," + ((height/2)+300) + "," + 300 + "," + ((height/2)-300) + "," + (620-100) + "," + ((height/2)-300) + "," + (620-100) + "," + ((height/2)-500);
-      })
-      .style("fill", "#bae4ce")
-      .style("stroke", "black");
+        .append("polygon")
+        .attr("points", function(){
+          return (620-100) + "," + ((height/2)-500) + "," + (620-150) + "," + ((height/2)-500) + "," + (620-150) + "," + ((height/2)-350) + "," + 250 + "," + ((height/2)-350) + "," + 250 + "," + ((height/2)+350) + "," + 1400 + "," +  ((height/2)+350) + "," + 1400 + "," + ((height/2)-350) + "," + (620+150) + "," + ((height/2)-350) + "," + (620+150) + "," + ((height/2)-500) + "," + (620+100) + "," + ((height/2)-500) + "," + (620+100) + "," + ((height/2)-300) + "," + (1400-50) + "," + ((height/2)-300) + "," + (1400-50) + "," + ((height/2)+300) + "," + 300 + "," + ((height/2)+300) + "," + 300 + "," + ((height/2)-300) + "," + (620-100) + "," + ((height/2)-300) + "," + (620-100) + "," + ((height/2)-500);
+        })
+        .style("fill", "#bae4ce")
+        .style("stroke", "black");
   }
 }
