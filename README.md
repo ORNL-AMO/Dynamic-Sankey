@@ -1,7 +1,12 @@
-# Dynamic-Sankey
+# Dynamic-Sankey [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ORNL-AMO/Dynamic-Sankey/blob/master/LICENSE.txt)
 
 ## Installation:
-Run `npm install`
+Run `npm install`  
+
+This package uses webpack to bundle d3 and the sankey.js. This needs to be done any time sankey.js is edited.  
+Run `npm run bundle`  
+
+Open sankey.html located in the demos folder.
 
 ## Description:
 
