@@ -340,29 +340,11 @@ zoomBtn.addEventListener('click', function(event){
         })
         .attr('marker-end', function(d) {
             return getEndMarker(d);
-        })
-        .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseout", mouseout);
+        });
 
     var displayValue = d3.select("app-sankey-diagram").append("div")
         .attr("class", "tooltip")
         .attr("display", "none");
-
-    function mouseover() {
-        displayValue.attr("display", "inline");
-    }
-
-    function mousemove() {
-        displayValue
-            .text("hi")
-            .attr("left", (d3.event.pageX - 34) + "px")
-            .attr("top", (d3.event.pageY - 12) + "px");
-    }
-
-    function mouseout() {
-        displayValue.attr("display", "none");
-    }
 
 
     //Draw nodes to the svg
@@ -472,7 +454,6 @@ zoomBtn.addEventListener('click', function(event){
                         return node_val.y + 80;
                     }
                 })
-                .style("font-size", "30px")
                 .attr("width", 100)
                 .attr("height", 50)
                 .append("xhtml:sankey-diagram")
@@ -485,12 +466,21 @@ zoomBtn.addEventListener('click', function(event){
                     return format(node_val.value);
                 })
                 .style("width", "140px")
+                .style("font-size", "30px")
                 .on("change", function(){
                     if(isNaN(parseFloat(this.value))){
                         nodes[i].value = 0;
                     }
                     else if((i != 0) && (this.value > (nodes[i].value + nodes[15].value))){
                         //nothing happens here
+                    }
+                    else if(i == 0){
+                        if(this.value >= (nodes[i].value - nodes[15].value)){
+                            nodes[i].value = parseFloat(this.value.replace(new RegExp(",", "g"), ""));
+                        }
+                        else{
+                            //nothing happens here
+                        }
                     }
                     else{
                         nodes[i].value = parseFloat(this.value.replace(new RegExp(",", "g"), ""));
