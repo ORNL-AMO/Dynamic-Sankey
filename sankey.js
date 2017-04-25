@@ -102,7 +102,7 @@ zoomBtn.addEventListener('click', function(event){
         .append("g")
         .call(findColor);
 
-    this.drawFurnace();
+    drawFurnace();
 
     function calcSankey() {
         var alterVal = 0, change;
