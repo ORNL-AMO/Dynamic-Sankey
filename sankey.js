@@ -1,4 +1,5 @@
 const d3 = require('d3');
+
 var svg;
 
 var makeBtn = document.getElementById("make");
@@ -11,17 +12,17 @@ const width = 1950,
 const baseSize = 300;
 
 makeBtn.addEventListener('click', function(event){
-  console.log('Make Good');
+  console.log('Make is good');
   makeSankey('body');
 });
 
 closeBtn.addEventListener('click', function(event){
-  console.log('Close Good');
+  console.log('Close is good');
   closeSankey('body');
 });
 
 zoomBtn.addEventListener('click', function(event){
-  console.log('Zoom Good');
+  console.log('Zoom is good');
   zoom('body');
 });
 
