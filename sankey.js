@@ -2,9 +2,9 @@ var d3;
 
 var svg;
 
-var makeBtn = document.getElementById("make");
-var closeBtn = document.getElementById("close");
-var zoomBtn = document.getElementById("zoom");
+var makeBtn = document.getElementById('make');
+var closeBtn = document.getElementById('close');
+var zoomBtn = document.getElementById('zoom');
 
 const width = 1950,
       height = 1200;
