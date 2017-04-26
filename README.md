@@ -14,7 +14,7 @@ through the system.
 ## Installation:
 Run `npm install`  
 
-This package uses webpack to bundle d3.js and the sankey.js. This needs to be done any time sankey.js is modified.  
+*This package uses webpack to bundle d3.js and the sankey.js. This needs to be done any time sankey.js is modified.*  
 Run `npm run bundle`  
 
 Open sankey.html located in the demos folder.
