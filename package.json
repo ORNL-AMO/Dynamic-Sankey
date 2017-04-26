@@ -2,14 +2,10 @@
   "name": "dynamic-sankey",
   "version": "0.0.0",
   "description": "Customizable dynamic Sankey diagram",
-  "scripts": {
-      "bundle": "./node_modules/.bin/webpack sankey.js --output-filename bundle.js"
-  },
   "dependencies": {
     "d3": "4.5.0"
   },
   "devDependencies": {
-    "webpack": "^2.4.1"
   },
   "repository": {
     "type": "git",
