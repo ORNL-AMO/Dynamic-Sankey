@@ -2,14 +2,6 @@
 
 A dynamic Sankey diagram based on D3.
 
-## Installation:
-Run `npm install`  
-
-This package uses webpack to bundle d3 and the sankey.js. This needs to be done any time sankey.js is edited.  
-Run `npm run bundle`  
-
-Open sankey.html located in the demos folder.
-
 ## Description:
 
 A Sankey Diagram is often used to show flow through a system.
@@ -19,8 +11,16 @@ detect changes and re-adjust itself to reflect those changes.
 The colored gradient of the Sankey also reflect the flow 
 through the system. 
 
+## Installation:
+Run `npm install`  
+
+This package uses webpack to bundle d3.js and the sankey.js. This needs to be done any time sankey.js is modified.  
+Run `npm run bundle`  
+
+Open sankey.html located in the demos folder.
+
 ---
 
 ## Notes
-*Currently Sankey Diagram is only ment to operate on **furnaces***  
+*Currently this Sankey diagram is only ment to operate on **furnaces***  
 * Should one want to change this, changes in the code are needed (specifically the embeded JSON part).
