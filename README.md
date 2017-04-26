@@ -1,5 +1,7 @@
 # Dynamic-Sankey [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ORNL-AMO/Dynamic-Sankey/blob/master/LICENSE.txt)
 
+A dynamic Sankey diagram based on D3.
+
 ## Installation:
 Run `npm install`  
 
