@@ -3,10 +3,16 @@
   "version": "0.0.0",
   "description": "Customizable dynamic Sankey diagram",
   "dependencies": {
-    "d3": "4.5.0"
+    "bootstrap": "^4.0.0-alpha.6",
+    "d3": "4.5.0",
+    "jquery": "^3.2.1",
+    "material-icons": "*",
+    "ngx-bootstrap": "^1.3.1",
+    "rc-color-picker": "^1.1.6",
+    "resizable": "^1.2.0",
+    "tether": "^1.4.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ORNL-AMO/Dynamic-Sankey.git"
