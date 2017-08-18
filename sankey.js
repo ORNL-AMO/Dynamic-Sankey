@@ -63,6 +63,27 @@ var mydragg = function(){
     }
 }();
 
+$(function() {
+
+    var $contextMenu = $("#contextMenu");
+
+    $("body").on("contextmenu", ".imageContainer", function(e) {
+        $contextMenu.css({
+            display: "block",
+            left: e.pageX - $('#sankey-display').offset().left,
+            top: e.pageY - $('#sankey-display').offset().top + 32
+        });
+        return false;
+    });
+
+    $("body").on("click", "*", function() {
+        $contextMenu.hide();
+    });
+    $("body").on("dragstart", ".imageContainer", function() {
+        $contextMenu.hide();
+    });
+
+});
 
 var eventX;
 var eventY;
@@ -90,22 +111,26 @@ var eventY;
                 (doc && doc.clientTop  || body && body.clientTop  || 0 );
         }
 
-        eventX = event.pageX;
-        if(document.getElementById('sankey-details') == null){
-            eventY = event.pageY;
-        }else{
-            eventY = event.pageY - document.getElementById('sankey-details').getBoundingClientRect().top - document.getElementById('sankey-details').getBoundingClientRect().height;
-        }
+        eventX = event.pageX - $('#sankey-display').offset().left;
+        eventY = event.pageY - $('#sankey-display').offset().top + 34;
 
-       // console.log(eventX + " " + eventY);
     }
 })();
 
-function handleFileSelect(evt) {
+function handleFileSelect(evt){
     evt.stopPropagation();
     evt.preventDefault();
 
-    var files = evt.dataTransfer.files; // FileList object.
+    var files = null;
+    var isBtnInput = false;
+
+    if(evt.dataTransfer != null) {
+        files = evt.dataTransfer.files; // FileList object.
+    }
+    else{
+        files = evt.target.files;
+        isBtnInput = true;
+    }
 
     // files is a FileList of File objects. List some properties.
     var output = [];
@@ -125,13 +150,19 @@ function handleFileSelect(evt) {
 
                 imageContainer.id = 'imageContainer';
                 imageContainer.className += "imageContainer";
-                imageContainer.style.left = eventX + "px";
-                imageContainer.style.top = eventY + "px";
+                if(isBtnInput){
+                    imageContainer.style.left = "0px";
+                    imageContainer.style.top = "0px";
+                }
+                else{
+                    imageContainer.style.left = (eventX  - 50) + "px";
+                    imageContainer.style.top = (eventY - 50) + "px";
+                }
+
                 imageContainer.style.width = "100px";
                 imageContainer.style.height = "100px";
                 imageContainer.onmousedown = function(){mydragg.startMoving(imageContainer,'sankey-display',event)};
                 imageContainer.onmouseup = function(){mydragg.stopMoving('sankey-display')};
-
 
                 var image = document.createElement("img");
 
@@ -185,10 +216,13 @@ function handleFileSelect(evt) {
 
                 document.getElementById("sankey-display").appendChild(imageContainer);
 
-                dnd("imageContainer");
-
                 //document.getElementById("sankey-display").style.backgroundImage = "url('" + e.target.result + "')";
 
+                // Render thumbnail.
+                var span = document.createElement('span');
+                span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                    '" title="', escape(theFile.name), '"/><br>'].join('');
+                document.getElementById('list').insertBefore(span, null);
             };
         })(f);
 
@@ -196,6 +230,10 @@ function handleFileSelect(evt) {
         reader.readAsDataURL(f);
     }
     document.getElementById('sankey-display').addEventListener('change', handleFileSelect, false);
+
+    if(isBtnInput){
+        document.getElementById('selectImageInput').value = "";
+    }
 }
 
 function handleDragOver(evt) {
@@ -208,6 +246,10 @@ function handleDragOver(evt) {
 var dropZone = document.getElementById('sankey-display');
 dropZone.addEventListener('dragover', handleDragOver, false);
 dropZone.addEventListener('drop', handleFileSelect, false);
+
+var inputBtn = document.getElementById('selectImageInput');
+inputBtn.onclick = addEventListener('change', handleFileSelect, false);
+inputBtn.onchange = addEventListener('change', handleFileSelect, false);
 
 var startX, startY, startWidth, startHeight;
 var element;
@@ -463,15 +505,13 @@ function stopDrag(e) {
         svg = d3.select(location).append('svg')
             .attr("width", "100%")
             .attr("height", "100%")
-            .attr("class", "drop_zone")
             .attr("preserveAspectRatio", "xMinYMin")
             .attr("id", "sankey-svg")
             .style("position", "relative")
             .style("top", "-34px")
             .style("z-index", "0")
             .call(zoom)
-            .append("g")
-                .attr("class", "drop_zone");
+            .append("g");
     }
 
     function updateSankeySVG(){
@@ -681,10 +721,7 @@ function stopDrag(e) {
     var offset = $('#sankey-display').offset();
 
     function makeSankey(location, isNewSankey){
-        console.log("here");
-        console.log(inputs);
         if(inputs != null) {
-            console.log("now");
             sankeyIsMade = true;
 
             makeNodes();
@@ -706,8 +743,6 @@ function stopDrag(e) {
 
             //changes are applied
             applyNodeHandles();
-
-            dnd("sankey-svg");
 
             links.forEach(function (d, i) {
                 var link_data = d;
@@ -1255,118 +1290,6 @@ function deleteLoss(lossNumber){
 function update(){
     if(sankeyIsMade) {
         makeSankey('#sankey-display', false);
-    }
-}
-
-function dnd(className){
-    function handleFileSelect(evt) {
-
-        evt.stopPropagation();
-        evt.preventDefault();
-
-        var files = evt.dataTransfer.files; // FileList object.
-
-        // files is a FileList of File objects. List some properties.
-        var output = [];
-        for (var i = 0, f; f = files[i]; i++) {
-            // Only process image files.
-            if (!f.type.match('image.*')) {
-                continue;
-            }
-
-            var reader = new FileReader();
-
-            // Closure to capture the file information.
-            reader.onload = (function(theFile) {
-                return function(e) {
-
-                    var imageContainer = document.createElement('div');
-
-                    imageContainer.id = 'imageContainer';
-                    imageContainer.className += "imageContainer";
-                    imageContainer.style.left = eventX + "px";
-                    imageContainer.style.top = eventY + "px";
-                    imageContainer.style.width = "100px";
-                    imageContainer.style.height = "100px";
-                    imageContainer.onmousedown = function(){mydragg.startMoving(imageContainer,'sankey-display',event)};
-                    imageContainer.onmouseup = function(){mydragg.stopMoving('sankey-display')};
-
-                    var image = document.createElement("img");
-
-                    imageContainer.appendChild(image);
-
-                    image.src = e.target.result;
-                    image.id = "image";
-                    image.style.width = "100%";
-                    image.style.height = "100%";
-
-                    image.ondragstart = function() { return false; };
-
-                    document.getElementById("banner").onmouseover = function(){mydragg.stopMoving('sankey-display')};
-                    document.getElementById("sankey-create").onmouseover = function(){mydragg.stopMoving('sankey-display')};
-
-                    var resizer = document.createElement('div');
-                    resizer.className = 'resizer';
-                    resizer.style.backgroundColor = "#303336";
-                    resizer.style.width = "10px";
-                    resizer.style.height = "10px";
-                    resizer.style.right = "0px";
-                    resizer.style.bottom = "0px";
-                    resizer.style.cursor = "se-resize";
-                    resizer.style.position = "absolute";
-                    resizer.style.display = "none";
-                    imageContainer.appendChild(resizer);
-
-                    imageContainer.onmouseover = function(){
-                        imageContainer.addEventListener('mouseover', function init() {
-                            imageContainer.removeEventListener('mouseover', init, false);
-                            imageContainer.className = imageContainer.className + ' resizable';
-
-                            resizer.style.display = null;
-
-                            resizer.onmousedown = function(e){
-                                imageContainer.onmousedown = function(){};
-                                imageContainer.onmouseup = function(){};
-                                initDrag(e, imageContainer)
-                            };
-                            resizer.onmouseup = function(){
-                                imageContainer.onmousedown = function(){mydragg.startMoving(imageContainer,'sankey-display',event)};
-                                imageContainer.onmouseup = function(){mydragg.stopMoving('sankey-display')};
-                            };
-                        }, false);
-                    };
-
-                    imageContainer.onmouseout = function(){
-                        resizer.style.display = "none";
-                    };
-
-                    document.getElementById("sankey-display").appendChild(imageContainer);
-
-                    dnd("imageContainer");
-
-                    //document.getElementById("sankey-display").style.backgroundImage = "url('" + e.target.result + "')";
-
-                };
-            })(f);
-
-            // Read in the image file as a data URL.
-            reader.readAsDataURL(f);
-        }
-        document.getElementsByClassName('drop_zone').addEventListener('change', handleFileSelect, false);
-    }
-
-    function handleDragOver(evt) {
-        evt.stopPropagation();
-        evt.preventDefault();
-        evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
-    }
-
-    // Setup the dnd listeners.
-    var dropZone = document.getElementsByClassName(className);
-
-    for(var i = 0; i < dropZone.length; i++) {
-        dropZone[i].addEventListener('dragover', handleDragOver, false);
-        dropZone[i].addEventListener('drop', handleFileSelect, false);
     }
 }
 

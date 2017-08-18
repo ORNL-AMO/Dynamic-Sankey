@@ -22,7 +22,7 @@
     </head>
     <body>
 
-        <div class="header-row noPrint" id="header-row" style="z-index: +5;">
+        <div class="header-row context noPrint" id="header-row" style="z-index: +5;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12" id="banner">
@@ -106,7 +106,9 @@
         <div class="col-md-12 text-center" id="sandbox" style="padding: 0px;">
             <!--<button id="addSankeyBtn" class='btn btn-secondary pull-left' onclick='makeSankeyForm()' style='display: inline-block; position: relative; z-index: 2; background-color: #7ec783'><span class='glyphicon glyphicon-plus'></span></button>-->
 
-            <button id="createSankeyBtn" class='btn btn-secondary text-center btn-pop noPrint' onclick='makeSankey("#sankey-display", true)' style='background-color: #7ec783; position: relative; z-index: 3;'><strong>Create Sankey</strong></button>
+            <div class="text-center noPrint" style="padding-right: 0px; position: relative; z-index: 3; display: inline-block">
+                <button id="createSankeyBtn" class='btn btn-secondary btn-pop' onclick='makeSankey("#sankey-display", true)' style='background-color: #7ec783;'><strong>Create Sankey</strong></button>
+            </div>
 
             <div class="pull-right noPrint" style="padding-right: 0px; position: relative; z-index: 3;">
                 <button class='btn btn-secondary pull-right btn-pop' title='edit' onclick='' style='background-color: #d4161c;'><i class='glyphicon glyphicon-minus'></i></button>
@@ -169,14 +171,25 @@
                             <h4 class="modal-title">Import Images</h4>
                         </div>
                         <div class="modal-body">
-                            <!--
-                            <div class="col-md-6" style="">
-                                <div class="row" style="padding-left: 15px; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #dcdcdc;" >
-                                        <h4 class="pull-left">Load Images</h4>
-                                </div>
-                                <input type="file" style="padding-top: 10px;" />
+                            <div class="row">
+
+                                <h4 class="text-center">Load Images</h4>
+
+                                <button id="selectImageBtn" class="btn btn-pop" style="position: relative; z-index: 10; background-color: #ffffff">Select Image</button>
+
+                                <input type="file" id="selectImageInput" name="files[]" multiple style='visibility: hidden; height: 0px; width: 0px;' />
+                                <script>
+                                    $("#selectImageBtn").click(function(){
+                                        $('#selectImageInput').click();
+                                    });
+                                </script>
+                                <br>
+
+                                <h4 class="text-center">Loaded Images</h4>
+                                <output id="list"></output>
+
+
                             </div>
-                            -->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -187,6 +200,14 @@
             </div>
 
             <div id="sankey-display" class="drop_zone" name="files[]" multiple>
+            </div>
+            <div id="contextMenu" class="dropdown clearfix">
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+                    <li><a tabindex="-1" onclick='bringToFront()'>Bring to Front</a></li>
+                    <li><a tabindex="-1" onclick='stepForward()'>Step Forward</a></li>
+                    <li><a tabindex="-1" onclick='stepBackwards()'>Step Backwards</a></li>
+                    <li><a tabindex="-1" onclick='sendToBack()'>Send to Back</a></li>
+                </ul>
             </div>
 
             <!--<div id="elem" onmousedown='mydragg.startMoving(this,"sankey-display",event);' onmouseup='mydragg.stopMoving("sankey-display");' style="width: 200px;height: 100px;"></div>-->
