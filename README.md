@@ -14,10 +14,5 @@ through the system.
 ## Installation:
 Run `npm install`  
 
-Open sankey.html located in the demos folder.
+Open index.html
 
----
-
-## Notes
-*Currently this Sankey diagram is only ment to operate on **furnaces***  
-* Should one want to change this, changes in the code are needed (specifically the embeded JSON part).
