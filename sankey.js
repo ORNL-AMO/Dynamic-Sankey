@@ -22,7 +22,7 @@ var numberOfOutputs;
 var totalNumberOfInputsAndOutputs = 0;
 var increaseOfInputsOrOutputs = false;
 var lastLength = 0;
-var flipedPosition = null;
+var isNodeHandleDeleted = false;
 
 var sequence;
 
@@ -246,6 +246,7 @@ function makeNodes(){
     //make input node
     nodes.push({
         name: "Input",
+        id: "firstInput",
         value: sequence[0].value,
         displaySize: baseSize,
         width: 300,
@@ -265,193 +266,346 @@ function makeNodes(){
     //Start at 1 for the input that must always come first
     for(var i = 1; i < sequence.length; i++) {
 
-        if (sequence[i].type === "output") {
-            //top
-            if (i % 2 != 0) {
-                nodes.push({
-                    name: "inter #" + i,
-                    value: 0,
-                    displaySize: 0,
-                    width: 0,
-                    x: 400 + (i - 1) * 230,
-                    y: 0,
-                    input: false,
-                    difference: false,
-                    inter: true,
-                    top: true,
-                    units: sequence[i].units,
-                    type: sequence[i].type,
-                    first: false,
-                    lastY: null
-                });
+        console.log(nodeHandles == null);
+        if(nodeHandles == null){
+            if (sequence[i].type === "output") {
+                //top
+                //give nodes top based top position of the last nodeHandle output or input
+                if (i % 2 != 0) {
+                    nodes.push({
+                        name: "inter #" + i,
+                        id: "inter" + i,
+                        value: 0,
+                        displaySize: 0,
+                        width: 0,
+                        x: 400 + (i - 1) * 230,
+                        y: 0,
+                        input: false,
+                        difference: false,
+                        inter: true,
+                        top: true,
+                        units: sequence[i].units,
+                        type: sequence[i].type,
+                        first: false,
+                        lastY: null
+                    });
 
-                nodes.push({
-                    name: sequence[i].name,
-                    value: sequence[i].value,
-                    displaySize: 0,
-                    width: 0,
-                    x: 600 + (i - 1) * 230,
-                    y: 0,
-                    input: false,
-                    difference: false,
-                    inter: false,
-                    top: true,
-                    units: sequence[i].units,
-                    type: sequence[i].type,
-                    first: false,
-                    lastY: null
-                });
+                    nodes.push({
+                        name: sequence[i].name,
+                        id: "output" + i,
+                        value: sequence[i].value,
+                        displaySize: 0,
+                        width: 0,
+                        x: 600 + (i - 1) * 230,
+                        y: 0,
+                        input: false,
+                        difference: false,
+                        inter: false,
+                        top: true,
+                        units: sequence[i].units,
+                        type: sequence[i].type,
+                        first: false,
+                        lastY: null
+                    });
+                }
+                //bottom
+                else {
+                    nodes.push({
+                        name: "inter #" + i,
+                        id: "inter" + i,
+                        value: 0,
+                        displaySize: 0,
+                        width: 0,
+                        x: 450 + (i - 1) * 230,
+                        y: 0,
+                        input: false,
+                        difference: false,
+                        inter: true,
+                        top: false,
+                        units: sequence[i].units,
+                        type: sequence[i].type,
+                        first: false,
+                        lastY: null
+                    });
+                    nodes.push({
+                        name: sequence[i].name,
+                        id: "output" + i,
+                        value: sequence[i].value,
+                        displaySize: 0,
+                        width: 0,
+                        x: 650 + (i - 1) * 230,
+                        y: 0,
+                        input: false,
+                        difference: false,
+                        inter: false,
+                        top: false,
+                        units: sequence[i].units,
+                        type: sequence[i].type,
+                        first: false,
+                        lastY: null
+                    });
+                }
             }
-            //bottom
-            else {
-                nodes.push({
-                    name: "inter #" + i,
-                    value: 0,
-                    displaySize: 0,
-                    width: 0,
-                    x: 450 + (i - 1) * 230,
-                    y: 0,
-                    input: false,
-                    difference: false,
-                    inter: true,
-                    top: false,
-                    units: sequence[i].units,
-                    type: sequence[i].type,
-                    first: false,
-                    lastY: null
-                });
-                nodes.push({
-                    name: sequence[i].name,
-                    value: sequence[i].value,
-                    displaySize: 0,
-                    width: 0,
-                    x: 650 + (i - 1) * 230,
-                    y: 0,
-                    input: false,
-                    difference: false,
-                    inter: false,
-                    top: false,
-                    units: sequence[i].units,
-                    type: sequence[i].type,
-                    first: false,
-                    lastY: null
-                });
+            else if(sequence[i].type === "input"){
+                //top
+                if (i % 2 != 0) {
+                    nodes.push({
+                        name: "inter #" + i,
+                        id: "inter" + i,
+                        value: 0,
+                        displaySize: 0,
+                        width: 0,
+                        x: 400 + (i - 1) * 230,
+                        y: 0,
+                        input: false,
+                        difference: false,
+                        inter: true,
+                        top: true,
+                        units: sequence[i].units,
+                        type: sequence[i].type,
+                        first: false,
+                        lastY: null
+                    });
+
+                    nodes.push({
+                        name: sequence[i].name,
+                        id: "output" + i,
+                        value: sequence[i].value,
+                        displaySize: 0,
+                        width: 0,
+                        x: 200 + (i - 1) * 230,
+                        y: 0,
+                        input: true,
+                        difference: false,
+                        inter: false,
+                        top: true,
+                        units: sequence[i].units,
+                        type: sequence[i].type,
+                        first: false,
+                        lastY: null
+                    });
+                }
+                //bottom
+                else {
+                    nodes.push({
+                        name: "inter #" + i,
+                        id: "inter" + i,
+                        value: 0,
+                        displaySize: 0,
+                        width: 0,
+                        x: 450 + (i - 1) * 230,
+                        y: 0,
+                        input: false,
+                        difference: false,
+                        inter: true,
+                        top: false,
+                        units: sequence[i].units,
+                        type: sequence[i].type,
+                        first: false,
+                        lastY: null
+                    });
+
+                    nodes.push({
+                        name: sequence[i].name,
+                        id: "output" + i,
+                        value: sequence[i].value,
+                        displaySize: 0,
+                        width: 0,
+                        x: 250 + (i - 1) * 230,
+                        y: 0,
+                        input: true,
+                        difference: false,
+                        inter: false,
+                        top: false,
+                        units: sequence[i].units,
+                        type: sequence[i].type,
+                        first: false,
+                        lastY: null
+                    });
+
+                }
             }
         }
-        else if(sequence[i].type === "input"){
-            //top
-            if (i % 2 != 0) {
-                nodes.push({
-                    name: "inter #" + i,
-                    value: 0,
-                    displaySize: 0,
-                    width: 0,
-                    x: 400 + (i - 1) * 230,
-                    y: 0,
-                    input: false,
-                    difference: false,
-                    inter: true,
-                    top: true,
-                    units: sequence[i].units,
-                    type: sequence[i].type,
-                    first: false,
-                    lastY: null
-                });
+        else{
+            if (sequence[i].type === "output") {
+                //top
+                //give nodes top based top position of the last nodeHandle output or input
+                console.log(i*2 + " < " + nodeHandles.length);
+                if ((i*2 < nodeHandles.length && nodeHandles[i*2].top) || ( increaseOfInputsOrOutputs && i*2 == nodeHandles.length&& !nodeHandles[nodeHandles.length-2].top)) {
+                    nodes.push({
+                        name: "inter #" + i,
+                        id: "inter" + i,
+                        value: 0,
+                        displaySize: 0,
+                        width: 0,
+                        x: 400 + (i - 1) * 230,
+                        y: 0,
+                        input: false,
+                        difference: false,
+                        inter: true,
+                        top: true,
+                        units: sequence[i].units,
+                        type: sequence[i].type,
+                        first: false,
+                        lastY: null
+                    });
 
-                nodes.push({
-                    name: sequence[i].name,
-                    value: sequence[i].value,
-                    displaySize: 0,
-                    width: 0,
-                    x: 200 + (i - 1) * 230,
-                    y: 0,
-                    input: true,
-                    difference: false,
-                    inter: false,
-                    top: true,
-                    units: sequence[i].units,
-                    type: sequence[i].type,
-                    first: false,
-                    lastY: null
-                });
+                    nodes.push({
+                        name: sequence[i].name,
+                        id: "output" + i,
+                        value: sequence[i].value,
+                        displaySize: 0,
+                        width: 0,
+                        x: 600 + (i - 1) * 230,
+                        y: 0,
+                        input: false,
+                        difference: false,
+                        inter: false,
+                        top: true,
+                        units: sequence[i].units,
+                        type: sequence[i].type,
+                        first: false,
+                        lastY: null
+                    });
+                }
+                //bottom
+                else {
+                    nodes.push({
+                        name: "inter #" + i,
+                        id: "inter" + i,
+                        value: 0,
+                        displaySize: 0,
+                        width: 0,
+                        x: 450 + (i - 1) * 230,
+                        y: 0,
+                        input: false,
+                        difference: false,
+                        inter: true,
+                        top: false,
+                        units: sequence[i].units,
+                        type: sequence[i].type,
+                        first: false,
+                        lastY: null
+                    });
+                    nodes.push({
+                        name: sequence[i].name,
+                        id: "output" + i,
+                        value: sequence[i].value,
+                        displaySize: 0,
+                        width: 0,
+                        x: 650 + (i - 1) * 230,
+                        y: 0,
+                        input: false,
+                        difference: false,
+                        inter: false,
+                        top: false,
+                        units: sequence[i].units,
+                        type: sequence[i].type,
+                        first: false,
+                        lastY: null
+                    });
+                }
             }
-            //bottom
-            else {
-                nodes.push({
-                    name: "inter #" + i,
-                    value: 0,
-                    displaySize: 0,
-                    width: 0,
-                    x: 450 + (i - 1) * 230,
-                    y: 0,
-                    input: false,
-                    difference: false,
-                    inter: true,
-                    top: false,
-                    units: sequence[i].units,
-                    type: sequence[i].type,
-                    first: false,
-                    lastY: null
-                });
+            else if(sequence[i].type === "input"){
+                //top
+                if ((i*2 < nodeHandles.length && nodeHandles[i*2].top) || ( increaseOfInputsOrOutputs && i*2 == nodeHandles.length&& !nodeHandles[nodeHandles.length-2].top)) {
+                    nodes.push({
+                        name: "inter #" + i,
+                        id: "inter" + i,
+                        value: 0,
+                        displaySize: 0,
+                        width: 0,
+                        x: 400 + (i - 1) * 230,
+                        y: 0,
+                        input: false,
+                        difference: false,
+                        inter: true,
+                        top: true,
+                        units: sequence[i].units,
+                        type: sequence[i].type,
+                        first: false,
+                        lastY: null
+                    });
 
-                nodes.push({
-                    name: sequence[i].name,
-                    value: sequence[i].value,
-                    displaySize: 0,
-                    width: 0,
-                    x: 250 + (i - 1) * 230,
-                    y: 0,
-                    input: true,
-                    difference: false,
-                    inter: false,
-                    top: false,
-                    units: sequence[i].units,
-                    type: sequence[i].type,
-                    first: false,
-                    lastY: null
-                });
+                    nodes.push({
+                        name: sequence[i].name,
+                        id: "output" + i,
+                        value: sequence[i].value,
+                        displaySize: 0,
+                        width: 0,
+                        x: 200 + (i - 1) * 230,
+                        y: 0,
+                        input: true,
+                        difference: false,
+                        inter: false,
+                        top: true,
+                        units: sequence[i].units,
+                        type: sequence[i].type,
+                        first: false,
+                        lastY: null
+                    });
+                }
+                //bottom
+                else {
+                    nodes.push({
+                        name: "inter #" + i,
+                        id: "inter" + i,
+                        value: 0,
+                        displaySize: 0,
+                        width: 0,
+                        x: 450 + (i - 1) * 230,
+                        y: 0,
+                        input: false,
+                        difference: false,
+                        inter: true,
+                        top: false,
+                        units: sequence[i].units,
+                        type: sequence[i].type,
+                        first: false,
+                        lastY: null
+                    });
 
+                    nodes.push({
+                        name: sequence[i].name,
+                        id: "output" + i,
+                        value: sequence[i].value,
+                        displaySize: 0,
+                        width: 0,
+                        x: 250 + (i - 1) * 230,
+                        y: 0,
+                        input: true,
+                        difference: false,
+                        inter: false,
+                        top: false,
+                        units: sequence[i].units,
+                        type: sequence[i].type,
+                        first: false,
+                        lastY: null
+                    });
+
+                }
             }
         }
+
     }
 
-    //make difference node
-    if(i%2 != 0) {
-        nodes.push({
-            name: difference.name,
-            value: 0,
-            displaySize: 0,
-            width: 0,
-            x: 400 + i *230,
-            y: 0,
-            input: false,
-            difference: true,
-            inter: false,
-            top: true,
-            units: difference.units,
-            type: "difference",
-            first: false,
-            lastY: null
-        });
-    }
-    else{
-        nodes.push({
-            name: difference.name,
-            value: 0,
-            displaySize: 0,
-            width: 0,
-            x: 400 + i *230,
-            y: 0,
-            input: false,
-            difference: true,
-            inter: false,
-            top: false,
-            units: difference.units,
-            type: "difference",
-            first: false,
-            lastY: null
-        });
-    }
+    nodes.push({
+        name: difference.name,
+        id: "difference",
+        value: 0,
+        displaySize: 0,
+        width: 0,
+        x: 400 + i *230,
+        y: 0,
+        input: false,
+        difference: true,
+        inter: false,
+        units: difference.units,
+        type: "difference",
+        first: false,
+        lastY: null
+    });
+    console.log(nodes);
 }
 
 function linkNodes(){
@@ -527,32 +681,38 @@ function updateNodeHandles(){
     var valuesChanged = false;
 
     //Check to see if any values have changed, and if so shift the nodes
-    for(var i = 0; i < nodeHandles.length; i++){
-        console.log(nodeHandles[i].lastValue + " == " + nodes[i].value);
-        if(nodeHandles[i].lastValue != nodes[i].value){
-            if(nodes[i].top){
-                for(var x = i; x < nodeHandles.length; x++){
-                    //Shift amount calculated
-                    nodeHandles[x].y += calcDisplayValue(nodeHandles[i].lastValue - nodes[i].value)/2;
+    for(var i = 0; i < nodes.length; i++){
+        if(nodeHandles[i].lastValue != nodes[i].value ) {
+
+
+            //TODO
+                if (nodeHandles[i].top || isNodeHandleDeleted) {
+                    for (var x = i; x < nodes.length; x++) {
+                        //Shift amount calculated
+                        nodeHandles[x].y += calcDisplayValue(nodeHandles[i].lastValue - nodes[i].value) / 2;
+                    }
                 }
-            }
-            else{
-                for(var x = i; x < nodeHandles.length; x++){
-                    //Shift amount calculated
-                    nodeHandles[x].y -= calcDisplayValue(nodeHandles[i].lastValue - nodes[i].value)/2;
+                else {
+                    for (var x = i; x < nodes.length; x++) {
+                        //Shift amount calculated
+                        nodeHandles[x].y -= calcDisplayValue(nodeHandles[i].lastValue - nodes[i].value) / 2;
+                    }
                 }
-            }
-            valuesChanged = true;
-            break;
+                valuesChanged = true;
+                break;
+
         }
     }
 
     //Update all changes
     if(valuesChanged){
-        for(var i = 0; i < nodeHandles.length; i++){
+        for(var i = 0; i < nodes.length; i++){
             nodeHandles[i].lastValue = nodes[i].value;
         }
     }
+
+    isNodeHandleDeleted = false;
+
 }
 
 function addNodeHandle(i){
@@ -560,7 +720,8 @@ function addNodeHandle(i){
         x: nodes[i].x,
         y: nodes[i].y,
         top: nodes[i].top,
-        lastValue: nodes[i].value
+        lastValue: nodes[i].value,
+        id: nodes[i].id
     });
 
 }
@@ -698,12 +859,14 @@ function calcSankey() {
             }
             else {
                 if (nodes[i + 1].type === "input") {
+
                     if (nodes[i].top) {
                         d.y = nodes[i - 2].y - nodes[i + 1].displaySize / 2;
                     }
                     else {
                         d.y = nodes[i - 2].y + nodes[i + 1].displaySize / 2;
                     }
+
                 }
                 //Output
                 else {
@@ -1136,7 +1299,6 @@ function enterEditingMode(){
             }
         }
     }
-
 }
 
 var linkGen;
@@ -1169,6 +1331,7 @@ function makeSankey(location, isNewSankey) {
         //changes are applied
         //TODO Fix nodeHandles
         applyNodeHandles();
+        console.log(nodes);
 
         links.forEach(function (d, i) {
             var link_data = d;
@@ -1803,6 +1966,21 @@ function deleteOutput(outputNumber){
             break;
         }
     }
+
+    var found = false;
+
+    for(var i = 0; i < nodeHandles.length; i++){
+        if( nodeHandles[i].id === ("inter"+(outputNumber+1))){
+            nodeHandles.splice(i, 2);
+            found = true;
+        }
+        if(found){
+            nodeHandles[i].x -= 230;
+        }
+    }
+
+    isNodeHandleDeleted = true;
+
     removeElementByID("output"+outputNumber);
     removeElementByID("output-spanner"+outputNumber);
     loadOutputs();
