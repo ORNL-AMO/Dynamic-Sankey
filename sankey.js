@@ -266,7 +266,6 @@ function makeNodes(){
     //Start at 1 for the input that must always come first
     for(var i = 1; i < sequence.length; i++) {
 
-        console.log(nodeHandles == null);
         if(nodeHandles == null){
             if (sequence[i].type === "output") {
                 //top
@@ -274,7 +273,7 @@ function makeNodes(){
                 if (i % 2 != 0) {
                     nodes.push({
                         name: "inter #" + i,
-                        id: "inter" + i,
+                        id: sequence[i].id,
                         value: 0,
                         displaySize: 0,
                         width: 0,
@@ -292,7 +291,7 @@ function makeNodes(){
 
                     nodes.push({
                         name: sequence[i].name,
-                        id: "output" + i,
+                        id: sequence[i].id,
                         value: sequence[i].value,
                         displaySize: 0,
                         width: 0,
@@ -312,7 +311,7 @@ function makeNodes(){
                 else {
                     nodes.push({
                         name: "inter #" + i,
-                        id: "inter" + i,
+                        id: sequence[i].id,
                         value: 0,
                         displaySize: 0,
                         width: 0,
@@ -329,7 +328,7 @@ function makeNodes(){
                     });
                     nodes.push({
                         name: sequence[i].name,
-                        id: "output" + i,
+                        id: sequence[i].id,
                         value: sequence[i].value,
                         displaySize: 0,
                         width: 0,
@@ -351,7 +350,7 @@ function makeNodes(){
                 if (i % 2 != 0) {
                     nodes.push({
                         name: "inter #" + i,
-                        id: "inter" + i,
+                        id: sequence[i].id,
                         value: 0,
                         displaySize: 0,
                         width: 0,
@@ -369,7 +368,7 @@ function makeNodes(){
 
                     nodes.push({
                         name: sequence[i].name,
-                        id: "output" + i,
+                        id: sequence[i].id,
                         value: sequence[i].value,
                         displaySize: 0,
                         width: 0,
@@ -389,7 +388,7 @@ function makeNodes(){
                 else {
                     nodes.push({
                         name: "inter #" + i,
-                        id: "inter" + i,
+                        id: sequence[i].id,
                         value: 0,
                         displaySize: 0,
                         width: 0,
@@ -407,7 +406,7 @@ function makeNodes(){
 
                     nodes.push({
                         name: sequence[i].name,
-                        id: "output" + i,
+                        id: sequence[i].id,
                         value: sequence[i].value,
                         displaySize: 0,
                         width: 0,
@@ -422,7 +421,6 @@ function makeNodes(){
                         first: false,
                         lastY: null
                     });
-
                 }
             }
         }
@@ -430,11 +428,10 @@ function makeNodes(){
             if (sequence[i].type === "output") {
                 //top
                 //give nodes top based top position of the last nodeHandle output or input
-                console.log(i*2 + " < " + nodeHandles.length);
-                if ((i*2 < nodeHandles.length && nodeHandles[i*2].top) || ( increaseOfInputsOrOutputs && i*2 == nodeHandles.length&& !nodeHandles[nodeHandles.length-2].top)) {
+                if ((i*2 < nodeHandles.length && nodeHandles[i*2].top) || ( increaseOfInputsOrOutputs && i*2 == nodeHandles.length && !nodeHandles[nodeHandles.length-2].top)) {
                     nodes.push({
                         name: "inter #" + i,
-                        id: "inter" + i,
+                        id: sequence[i].id,
                         value: 0,
                         displaySize: 0,
                         width: 0,
@@ -452,7 +449,7 @@ function makeNodes(){
 
                     nodes.push({
                         name: sequence[i].name,
-                        id: "output" + i,
+                        id: sequence[i].id,
                         value: sequence[i].value,
                         displaySize: 0,
                         width: 0,
@@ -472,7 +469,7 @@ function makeNodes(){
                 else {
                     nodes.push({
                         name: "inter #" + i,
-                        id: "inter" + i,
+                        id: sequence[i].id,
                         value: 0,
                         displaySize: 0,
                         width: 0,
@@ -489,7 +486,7 @@ function makeNodes(){
                     });
                     nodes.push({
                         name: sequence[i].name,
-                        id: "output" + i,
+                        id: sequence[i].id,
                         value: sequence[i].value,
                         displaySize: 0,
                         width: 0,
@@ -511,7 +508,7 @@ function makeNodes(){
                 if ((i*2 < nodeHandles.length && nodeHandles[i*2].top) || ( increaseOfInputsOrOutputs && i*2 == nodeHandles.length&& !nodeHandles[nodeHandles.length-2].top)) {
                     nodes.push({
                         name: "inter #" + i,
-                        id: "inter" + i,
+                        id: sequence[i].id,
                         value: 0,
                         displaySize: 0,
                         width: 0,
@@ -529,7 +526,7 @@ function makeNodes(){
 
                     nodes.push({
                         name: sequence[i].name,
-                        id: "output" + i,
+                        id: sequence[i].id,
                         value: sequence[i].value,
                         displaySize: 0,
                         width: 0,
@@ -549,7 +546,7 @@ function makeNodes(){
                 else {
                     nodes.push({
                         name: "inter #" + i,
-                        id: "inter" + i,
+                        id: sequence[i].id,
                         value: 0,
                         displaySize: 0,
                         width: 0,
@@ -567,7 +564,7 @@ function makeNodes(){
 
                     nodes.push({
                         name: sequence[i].name,
-                        id: "output" + i,
+                        id: sequence[i].id,
                         value: sequence[i].value,
                         displaySize: 0,
                         width: 0,
@@ -586,9 +583,9 @@ function makeNodes(){
                 }
             }
         }
-
     }
 
+    /*
     nodes.push({
         name: difference.name,
         id: "difference",
@@ -605,7 +602,48 @@ function makeNodes(){
         first: false,
         lastY: null
     });
-    console.log(nodes);
+    */
+
+    if(!nodes[nodes.length-1].top) {
+        nodes.push({
+            name: difference.name,
+            id: "difference",
+            value: 0,
+            displaySize: 0,
+            width: 0,
+            x: 400 + i *230,
+            y: 0,
+            input: false,
+            difference: true,
+            inter: false,
+            top: true,
+            units: difference.units,
+            type: "difference",
+            first: false,
+            lastY: null
+        });
+    }
+    else {
+        nodes.push({
+            name: difference.name,
+            id: "difference",
+            value: 0,
+            displaySize: 0,
+            width: 0,
+            x: 400 + i * 230,
+            y: 0,
+            input: false,
+            difference: true,
+            inter: false,
+            top: false,
+            units: difference.units,
+            type: "difference",
+            first: false,
+            lastY: null
+        });
+    }
+    //console.log(nodes);
+
 }
 
 function linkNodes(){
@@ -659,11 +697,38 @@ function linkNodes(){
 function updateNodeHandles(){
     if(nodeHandles.length != 0) {
         if(increaseOfInputsOrOutputs){
+
+            //save difference node's x and y position
+            var tmpX = nodeHandles[nodeHandles.length-1].x;
+            var tmpY = nodeHandles[nodeHandles.length-1].y;
+
             //Remove the last difference node
             nodeHandles.pop();
             for (var x = lastLength-1; x < nodes.length; x++) {
                 addNodeHandle(x);
             }
+
+            //Add back in the difference node and apply its previous changes
+            nodeHandles[nodeHandles.length-1].x = tmpX + 230;
+
+            //Shift difference depending on type and if it is top or bottom
+            if(nodes[nodes.length-2].type === "output"){
+                if(nodes[nodes.length-2].top){
+                    nodeHandles[nodeHandles.length-1].y = tmpY + nodes[nodes.length-2].displaySize/2;
+                }
+                else{
+                    nodeHandles[nodeHandles.length-1].y = tmpY - nodes[nodes.length-2].displaySize/2;
+                }
+            }
+            else{
+                if(nodes[nodes.length-2].top){
+                    nodeHandles[nodeHandles.length-1].y = tmpY - nodes[nodes.length-2].displaySize/2;
+                }
+                else{
+                    nodeHandles[nodeHandles.length-1].y = tmpY + nodes[nodes.length-2].displaySize/2;
+                }
+            }
+
         }
         else{
             for (var x = nodeHandles.length; x < nodes.length; x++) {
@@ -683,24 +748,20 @@ function updateNodeHandles(){
     //Check to see if any values have changed, and if so shift the nodes
     for(var i = 0; i < nodes.length; i++){
         if(nodeHandles[i].lastValue != nodes[i].value ) {
-
-
-            //TODO
-                if (nodeHandles[i].top || isNodeHandleDeleted) {
-                    for (var x = i; x < nodes.length; x++) {
-                        //Shift amount calculated
-                        nodeHandles[x].y += calcDisplayValue(nodeHandles[i].lastValue - nodes[i].value) / 2;
-                    }
+            if (nodeHandles[i].top || isNodeHandleDeleted) {
+                for (var x = i; x < nodes.length; x++) {
+                    //Shift amount calculated
+                    nodeHandles[x].y += calcDisplayValue(nodeHandles[i].lastValue - nodes[i].value) / 2;
                 }
-                else {
-                    for (var x = i; x < nodes.length; x++) {
-                        //Shift amount calculated
-                        nodeHandles[x].y -= calcDisplayValue(nodeHandles[i].lastValue - nodes[i].value) / 2;
-                    }
+            }
+            else {
+                for (var x = i; x < nodes.length; x++) {
+                    //Shift amount calculated
+                    nodeHandles[x].y -= calcDisplayValue(nodeHandles[i].lastValue - nodes[i].value) / 2;
                 }
-                valuesChanged = true;
-                break;
-
+            }
+            valuesChanged = true;
+            break;
         }
     }
 
@@ -851,15 +912,26 @@ function calcSankey() {
         if (d.inter) {
             if (i == 1) {
                 if (nodes[i + 1].type === "input") {
-                    d.y = nodes[0].y - nodes[i + 1].displaySize / 2;
+                    //Adjust if first ist top or bottom
+                    if(nodes[i].top){
+                        d.y = nodes[0].y - nodes[i + 1].displaySize / 2;
+                    }
+                    else{
+                        d.y = nodes[0].y + nodes[i + 1].displaySize / 2;
+                    }
                 }
                 else {
-                    d.y = nodes[0].y + nodes[i + 1].displaySize / 2;
+                    //Adjust if first ist top or bottom
+                    if(nodes[i].top){
+                        d.y = nodes[0].y + nodes[i + 1].displaySize / 2;
+                    }
+                    else{
+                        d.y = nodes[0].y - nodes[i + 1].displaySize / 2;
+                    }
                 }
             }
             else {
                 if (nodes[i + 1].type === "input") {
-
                     if (nodes[i].top) {
                         d.y = nodes[i - 2].y - nodes[i + 1].displaySize / 2;
                     }
@@ -911,6 +983,7 @@ function calcSankey() {
             }
         }
     });
+    console.log(nodes);
 }
 
 function calcDisplayValue(val){
@@ -974,12 +1047,18 @@ function makeLinks(d){
                     }
                 }
                 else{
-                    points.push([nodes[d.target].x - 5,     nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
-                    points.push([nodes[d.target].x,         nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
+                    if(nodes[d.source + 2].top){
+                        points.push([nodes[d.target].x - 5,     nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
+                        points.push([nodes[d.target].x,         nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
+                    }
+                    else{
+                        points.push([nodes[d.target].x - 5,     nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
+                        points.push([nodes[d.target].x,         nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
+                    }
                 }
             }
             else {
-                if(nodes[d.source + 2].type === "input"){
+                if(nodes[d.source + 2].type === "input" ){
                     if(!nodes[d.source + 2].top){ //If the next source node is also bottom, then we must accommodate
                         points.push([nodes[d.target].x - 5,     nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
                         points.push([nodes[d.target].x,         nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
@@ -990,8 +1069,14 @@ function makeLinks(d){
                     }
                 }
                 else{
-                    points.push([nodes[d.target].x - 5,     nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
-                    points.push([nodes[d.target].x,         nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
+                    if(nodes[d.source + 2].top){
+                        points.push([nodes[d.target].x - 5,     nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
+                        points.push([nodes[d.target].x,         nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
+                    }
+                    else{
+                        points.push([nodes[d.target].x - 5,     nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
+                        points.push([nodes[d.target].x,         nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
+                    }
                 }
             }
         }
@@ -1001,12 +1086,24 @@ function makeLinks(d){
             if (nodes[d.source].top) {
                 if(nodes[d.source].type === "output"){
                     if(nodes[d.source + 2].top){ //If the next source node is also top, then we must accommodate
-                        points.push([nodes[d.target].x - 5,     nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
-                        points.push([nodes[d.target].x,         nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
+                        if(nodes[d.source + 2].type === "output"){
+                            points.push([nodes[d.target].x - 5,     nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
+                            points.push([nodes[d.target].x,         nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
+                        }
+                        else{
+                            points.push([nodes[d.target].x - 5,     nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
+                            points.push([nodes[d.target].x,         nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
+                        }
                     }
                     else{ //next source node is bottom
-                        points.push([nodes[d.target].x - 5,     nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
-                        points.push([nodes[d.target].x,         nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
+                        if(nodes[d.source + 2].type === "output"){
+                            points.push([nodes[d.target].x - 5,     nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
+                            points.push([nodes[d.target].x,         nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
+                        }
+                        else{
+                            points.push([nodes[d.target].x - 5,     nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
+                            points.push([nodes[d.target].x,         nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
+                        }
                     }
                 }
                 else{
@@ -1017,12 +1114,24 @@ function makeLinks(d){
             else {
                 if(nodes[d.source].type === "output"){
                     if(!nodes[d.source + 2].top){ //If the next source node is also bottom, then we must accommodate
-                        points.push([nodes[d.target].x - 5,     nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
-                        points.push([nodes[d.target].x,         nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
+                        if(nodes[d.source + 2].type === "output"){
+                            points.push([nodes[d.target].x - 5,     nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
+                            points.push([nodes[d.target].x,         nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
+                        }
+                        else{
+                            points.push([nodes[d.target].x - 5,     nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
+                            points.push([nodes[d.target].x,         nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
+                        }
                     }
                     else{ //next source node is top
-                        points.push([nodes[d.target].x - 5,     nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
-                        points.push([nodes[d.target].x,         nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
+                        if(nodes[d.source + 2].type === "output"){
+                            points.push([nodes[d.target].x - 5,     nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
+                            points.push([nodes[d.target].x,         nodes[d.target].y - nodes[d.target + 1].displaySize/2 ]);
+                        }
+                        else{
+                            points.push([nodes[d.target].x - 5,     nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
+                            points.push([nodes[d.target].x,         nodes[d.target].y + nodes[d.target + 1].displaySize/2 ]);
+                        }
                     }
                 }
                 else{
@@ -1089,7 +1198,7 @@ function makeLinks(d){
 
 function applyNodeHandles(){
     if(increaseOfInputsOrOutputs){
-        for(var i = 0; i < (lastLength-1); i++){
+        for(var i = 0; i < nodes.length; i++){
             nodes[i].x = nodeHandles[i].x;
             nodes[i].y = nodeHandles[i].y;
             nodes[i].top = nodeHandles[i].top;
@@ -1159,7 +1268,7 @@ function enterEditingMode(){
 
         makeSankey('#sankey-display', false);
     }
-    //TODO
+
     function dragged(d, i) {
 
         nodeHandles[i].x = (d3.event.x - $('#sankey-display').offset().left + $(window).scrollLeft() - lastTransformX) / lastTransformK;
@@ -1309,7 +1418,6 @@ var offset = $('#sankey-display').offset();
 
 function makeSankey(location, isNewSankey) {
     if (inputs != null) {
-        sankeyIsMade = true;
 
         makeNodes();
         linkNodes();
@@ -1329,9 +1437,7 @@ function makeSankey(location, isNewSankey) {
         updateNodeHandles();
 
         //changes are applied
-        //TODO Fix nodeHandles
         applyNodeHandles();
-        console.log(nodes);
 
         links.forEach(function (d, i) {
             var link_data = d;
@@ -1552,6 +1658,7 @@ function makeSankey(location, isNewSankey) {
 
     increaseOfInputsOrOutputs = false;
     lastLength = nodes.length;
+    sankeyIsMade = true;
 }
 
 function makeSankeyForm(){
@@ -1968,14 +2075,21 @@ function deleteOutput(outputNumber){
     }
 
     var found = false;
+    var top = false;
+    var outputValue = 0;
 
     for(var i = 0; i < nodeHandles.length; i++){
-        if( nodeHandles[i].id === ("inter"+(outputNumber+1))){
+        if( nodeHandles[i].id === ("output"+outputNumber)){
+            top = nodeHandles[i].top;
+            outputValue = nodeHandles[i+1].lastValue;
             nodeHandles.splice(i, 2);
             found = true;
         }
         if(found){
             nodeHandles[i].x -= 230;
+            if(!top){
+                nodeHandles[i].y += calcDisplayValue(outputValue);
+            }
         }
     }
 
