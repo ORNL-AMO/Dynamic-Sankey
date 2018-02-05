@@ -1883,14 +1883,29 @@ function addInput(){
     newInput.className = "input text-center sequenceVariable";
     newInput.style.paddingTop = "20px";
 
-    newInput.innerHTML =    "<h3 id='input-title"+ numberOfInputs +"' contenteditable='true' onchange='loadInputs()' style='margin-top: 0px'>" + "Input #" + (numberOfInputs + 1) + "</h3>" +
-        "<div class='input-group'>" +
-        "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputInput" + numberOfInputs + " ' onchange='loadInputs()'  style='width: 160px -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;' />" +
-        "</div>" +
-        "<div class='input-group'>" +
-        "<span class='input-group-addon' id='basic-addon1'>Units</span>" +
-        "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputUnits" + numberOfOutputs + " ' onchange='loadInputs()' style='width: 103px' />" +
-        "</div>";
+    //Don't give the first input the option to be deleted
+    if(numberOfInputs == 0){
+        newInput.innerHTML =    "<h3 id='input-title"+ numberOfInputs +"' contenteditable='true' onchange='loadInputs()' style='margin-top: 0px'>" + "Input #" + (numberOfInputs + 1) + "</h3>" +
+            "<div class='input-group'>" +
+            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputInput" + numberOfInputs + " ' onchange='loadInputs()'  style='width: 160px -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;' />" +
+            "</div>" +
+            "<div class='input-group'>" +
+            "<span class='input-group-addon' id='basic-addon1'>Units</span>" +
+            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputUnits" + numberOfOutputs + " ' onchange='loadInputs()' style='width: 103px' />" +
+            "</div>";
+    }
+    else{
+        newInput.innerHTML =    "<h3 id='input-title"+ numberOfInputs +"' contenteditable='true' onchange='loadInputs()' style='margin-top: 0px'>" + "Input #" + (numberOfInputs + 1) + "</h3>" +
+            "<div class='input-group'>" +
+            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputInput" + numberOfInputs + " ' onchange='loadInputs()'  style='width: 120px -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;' />" +
+            "<span class='input-group-addon' style='margin: 0; padding: 0; border: 0'>" +
+            "<button class='btn btn-secondary' onclick='deleteInput("+numberOfInputs+")' style='background-color: #8f3236'><span class='glyphicon glyphicon-minus'></span></button>" +
+            "</div>" +
+            "<div class='input-group'>" +
+            "<span class='input-group-addon' id='basic-addon1'>Units</span>" +
+            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputUnits" + numberOfOutputs + " ' onchange='loadInputs()' style='width: 103px' />" +
+            "</div>";
+    }
 
     inputs.appendChild(newInput);
 
@@ -1928,14 +1943,28 @@ function addSavedInput(value, units){
     newInput.className = "input text-center sequenceVariable";
     newInput.style.paddingTop = "20px";
 
-    newInput.innerHTML =    "<h3 id='input-title"+ numberOfInputs +"' contenteditable='true' onchange='loadInputs()' style='margin-top: 0px'>" + "Input #" + (numberOfInputs + 1) + "</h3>" +
-        "<div class='input-group'>" +
-        "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputInput" + numberOfInputs + " ' onchange='loadInputs()'  style='width: 160px -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;' value=" + value +" />" +
-        "</div>" +
-        "<div class='input-group'>" +
-        "<span class='input-group-addon' id='basic-addon1'>Units</span>" +
-        "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputUnits" + numberOfOutputs + " ' onchange='loadInputs()' style='width: 103px' value=" + units +" />" +
-        "</div>";
+    if(numberOfInputs == 0) {
+        newInput.innerHTML =    "<h3 id='input-title"+ numberOfInputs +"' contenteditable='true' onchange='loadInputs()' style='margin-top: 0px'>" + "Input #" + (numberOfInputs + 1) + "</h3>" +
+            "<div class='input-group'>" +
+            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputInput" + numberOfInputs + " ' onchange='loadInputs()'  style='width: 160px -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;' value=" + value +" />" +
+            "</div>" +
+            "<div class='input-group'>" +
+            "<span class='input-group-addon' id='basic-addon1'>Units</span>" +
+            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputUnits" + numberOfOutputs + " ' onchange='loadInputs()' style='width: 103px' value=" + units +" />" +
+            "</div>";
+    }
+    else{
+        newInput.innerHTML =    "<h3 id='input-title"+ numberOfInputs +"' contenteditable='true' onchange='loadInputs()' style='margin-top: 0px'>" + "Input #" + (numberOfInputs + 1) + "</h3>" +
+            "<div class='input-group'>" +
+            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputInput" + numberOfInputs + " ' onchange='loadInputs()'  style='width: 120px -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;' value=" + value +" />" +
+            "<span class='input-group-addon' style='margin: 0; padding: 0; border: 0'>" +
+            "<button class='btn btn-secondary' onclick='deleteInput("+numberOfInputs+")' style='background-color: #8f3236'><span class='glyphicon glyphicon-minus'></span></button>" +
+            "</div>" +
+            "<div class='input-group'>" +
+            "<span class='input-group-addon' id='basic-addon1'>Units</span>" +
+            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputUnits" + numberOfOutputs + " ' onchange='loadInputs()' style='width: 103px' value=" + units +" />" +
+            "</div>";
+    }
 
     inputs.appendChild(newInput);
 
@@ -2101,12 +2130,40 @@ function deleteOutput(outputNumber){
     moveDiffrenceTable();
 }
 
-function deleteInput(sequenceNumber, InputNumber){
+function deleteInput(inputNumber){
+
     columns--;
-    sequence.splice(sequenceNumber, 1);
     totalNumberOfInputsAndOutputs--;
-    removeElementByID("input"+InputNumber);
-    removeElementByID("input-spanner"+InputNumber);
+    for(var i = 0; i < sequence.length; i++){
+        if( sequence[i].id === ("input"+inputNumber)){
+            sequence.splice(i, 1);
+            break;
+        }
+    }
+
+    var found = false;
+    var top = false;
+    var outputValue = 0;
+
+    for(var i = 0; i < nodeHandles.length; i++){
+        if( nodeHandles[i].id === ("input"+inputNumber)){
+            top = nodeHandles[i].top;
+            outputValue = nodeHandles[i+1].lastValue;
+            nodeHandles.splice(i, 2);
+            found = true;
+        }
+        if(found){
+            nodeHandles[i].x -= 230;
+            if(!top){
+                nodeHandles[i].y -= calcDisplayValue(outputValue);
+            }
+        }
+    }
+
+    isNodeHandleDeleted = true;
+
+    removeElementByID("input"+inputNumber);
+    removeElementByID("input-spanner"+inputNumber);
     loadOutputs();
     moveDiffrenceTable();
 }
