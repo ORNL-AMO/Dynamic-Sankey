@@ -585,25 +585,6 @@ function makeNodes(){
         }
     }
 
-    /*
-    nodes.push({
-        name: difference.name,
-        id: "difference",
-        value: 0,
-        displaySize: 0,
-        width: 0,
-        x: 400 + i *230,
-        y: 0,
-        input: false,
-        difference: true,
-        inter: false,
-        units: difference.units,
-        type: "difference",
-        first: false,
-        lastY: null
-    });
-    */
-
     if(!nodes[nodes.length-1].top) {
         nodes.push({
             name: difference.name,
@@ -1548,7 +1529,7 @@ function makeSankey(location, isNewSankey) {
             .append("text")
             .attr("text-anchor", "middle")
             .attr("dx", function (d) {
-                if (d.input) {
+                if (d.first) {
                     return d.x - 70;
                 }
                 else if (d.difference) {
@@ -1559,8 +1540,8 @@ function makeSankey(location, isNewSankey) {
                 }
             })
             .attr("dy", function (d) {
-                if (d.input || d.difference) {
-                    return d.y + (d.displaySize / 2);
+                if (d.first || d.difference) {
+                    return d.y + (d.displaySize / 2) - 80;
                 }
                 else {
                     if (d.top) {
@@ -1584,7 +1565,7 @@ function makeSankey(location, isNewSankey) {
             .append("text")
             .attr("text-anchor", "middle")
             .attr("dx", function (d) {
-                if (d.input) {
+                if (d.first) {
                     return d.x - 70;
                 }
                 else if (d.difference) {
@@ -1595,8 +1576,8 @@ function makeSankey(location, isNewSankey) {
                 }
             })
             .attr("dy", function (d) {
-                if (d.input || d.difference) {
-                    return d.y + (d.displaySize / 2) + 95;
+                if (d.first || d.difference) {
+                    return d.y + (d.displaySize / 2) + 10;
                 }
                 else {
                     if (d.top) {
@@ -1620,7 +1601,7 @@ function makeSankey(location, isNewSankey) {
             .append("text")
             .attr("text-anchor", "middle")
             .attr("dx", function (d) {
-                if (d.input) {
+                if (d.first) {
                     return d.x - 70;
                 }
                 else if (d.difference) {
@@ -1631,8 +1612,8 @@ function makeSankey(location, isNewSankey) {
                 }
             })
             .attr("dy", function (d) {
-                if (d.input || d.difference) {
-                    return (d.y + (d.displaySize / 2)) + 45;
+                if (d.first || d.difference) {
+                    return (d.y + (d.displaySize / 2)) - 35;
                 }
                 else if (d.top) {
                     return d.y - 65;
