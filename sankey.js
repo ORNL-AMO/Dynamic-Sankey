@@ -724,33 +724,37 @@ function updateNodeHandles(){
         }
     }
 
-    var valuesChanged = false;
-
-    //Check to see if any values have changed, and if so shift the nodes
-    for(var i = 0; i < nodes.length; i++){
-        if(nodeHandles[i].lastValue != nodes[i].value ) {
-            if (nodeHandles[i].top || isNodeHandleDeleted) {
-                for (var x = i; x < nodes.length; x++) {
-                    //Shift amount calculated
-                    nodeHandles[x].y += calcDisplayValue(nodeHandles[i].lastValue - nodes[i].value) / 2;
+    if(nodeHandles[0].lastValue == nodes[0].value){
+        //Check to see if any values have changed, and if so shift the nodes
+        for(var i = 0; i < nodes.length; i++){
+            if(nodeHandles[i].lastValue != nodes[i].value) {
+                if (nodeHandles[i].top || isNodeHandleDeleted) {
+                    for (var x = i; x < nodes.length; x++) {
+                        //Shift amount calculated
+                        nodeHandles[x].y += calcDisplayValue(nodeHandles[i].lastValue - nodes[i].value) / 2;
+                    }
                 }
-            }
-            else {
-                for (var x = i; x < nodes.length; x++) {
-                    //Shift amount calculated
-                    nodeHandles[x].y -= calcDisplayValue(nodeHandles[i].lastValue - nodes[i].value) / 2;
+                else {
+                    for (var x = i; x < nodes.length; x++) {
+                        //Shift amount calculated
+                        nodeHandles[x].y -= calcDisplayValue(nodeHandles[i].lastValue - nodes[i].value) / 2;
+                    }
                 }
+                break;
             }
-            valuesChanged = true;
-            break;
+        }
+    }
+    else{
+        //Shift nodes to new size while preserving differences previously made by the users
+        for(var i = 0; i < nodes.length; i++){
+            nodeHandles[i].y = nodes[i].y + (nodeHandles[i].y - nodeHandles[i].lastBaseY);
         }
     }
 
     //Update all changes
-    if(valuesChanged){
-        for(var i = 0; i < nodes.length; i++){
-            nodeHandles[i].lastValue = nodes[i].value;
-        }
+    for(var i = 0; i < nodes.length; i++){
+        nodeHandles[i].lastValue = nodes[i].value;
+        nodeHandles[i].lastDisplaySize = nodes[i].displaySize
     }
 
     isNodeHandleDeleted = false;
@@ -763,11 +767,11 @@ function addNodeHandle(i){
         y: nodes[i].y,
         top: nodes[i].top,
         lastValue: nodes[i].value,
-        id: nodes[i].id
+        lastDisplaySize: nodes[i].displaySize,
+        id: nodes[i].id,
+        lastBaseY: nodes[i].y
     });
-
 }
-
 
 function initDifference(){
     difference = {
@@ -821,8 +825,6 @@ function updateSankeySVG(){
             .call(findColor);
     }
 }
-
-var linkMidLine;
 
 function calcSankey() {
 
@@ -964,7 +966,6 @@ function calcSankey() {
             }
         }
     });
-    console.log(nodes);
 }
 
 function calcDisplayValue(val){
@@ -1180,6 +1181,7 @@ function makeLinks(d){
 function applyNodeHandles(){
     if(increaseOfInputsOrOutputs){
         for(var i = 0; i < nodes.length; i++){
+            nodeHandles[i].lastBaseY = nodes[i].y;
             nodes[i].x = nodeHandles[i].x;
             nodes[i].y = nodeHandles[i].y;
             nodes[i].top = nodeHandles[i].top;
@@ -1188,6 +1190,7 @@ function applyNodeHandles(){
     }
     else{
         for(var i = 0; i < (nodes.length); i++){
+            nodeHandles[i].lastBaseY = nodes[i].y;
             nodes[i].x = nodeHandles[i].x;
             nodes[i].y = nodeHandles[i].y;
             nodes[i].top = nodeHandles[i].top;
