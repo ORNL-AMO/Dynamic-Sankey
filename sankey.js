@@ -793,7 +793,7 @@ function zoomed() {
     lastTransformY = d3.event.transform.y;
     lastTransformK = d3.event.transform.k;
 
-    d3.select('svg').select('g').attr('transform', 'translate(' + d3.event.transform.x + ',' + d3.event.transform.y + ') scale(' + d3.event.transform.k + ')');
+    d3.select('#sankey-svg').select('g').attr('transform', 'translate(' + d3.event.transform.x + ',' + d3.event.transform.y + ') scale(' + d3.event.transform.k + ')');
 }
 
 

@@ -23,10 +23,24 @@
     <div class="container-fluid align-middle">
         <div class="row">
             <div class="col-xs-12 " id="banner">
-                <h1  id="banner-title" class="pull-left align-middle">
+                <div id="doe-banner"></div>
+
+                <h1  id="banner-title" class="pull-right" style="position: relative; top: 4px;">
                         <b>Dynamic Sankey</b>
                 </h1>
-                <button type="button" class="btn btn-default btn-circle pull-right btn-lg" title='help' data-toggle="modal" data-target="#helpModal" style="position: relative; top: 25%"><span class="glyphicon glyphicon-question-sign" style="top:-12px; left: -19px; font-size: 55px"></span></button>
+
+                <svg class="pull-right arrow" height="76" width="70" style="position: relative;">
+                    <polygon points="20,6 20,70 52,38" style="fill:#ff0100; stroke:#ff0100; stroke-width:1" />
+                </svg>
+                <svg class="pull-right arrow" height="76" width="52" style="position: relative; left: 10;">
+                    <polygon points="20,6 20,70 52,38" style="fill:#fff300; stroke:#fff300; stroke-width:1" />
+                </svg>
+
+                <svg class="pull-right arrow" height="76" width="52" style="position: relative; left: 20;">
+                    <polygon points="20,6 20,70 52,38" style="fill:#0bff00; stroke:#0bff00;stroke-width:1" />
+                </svg>
+
+                <!--<button type="button" class="btn btn-default btn-circle pull-right btn-lg" title='help' data-toggle="modal" data-target="#helpModal" style="position: relative; top: 25%"><span class="glyphicon glyphicon-question-sign" style="top:-12px; left: -19px; font-size: 55px"></span></button>-->
             </div>
         </div>
     </div>
@@ -94,6 +108,10 @@
             $('#fileSelector').click();
         });
     </script>
+
+    <div class="dropdown pull-right noPrint">
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="modal" data-target="#helpModal" style="width: 40px; height: 40px; background-color: #ffffff; border: 0;" title="help"><i class="glyphicon glyphicon-question-sign" style="position: relative; font-size: 25px; color: #20181f;"></i></button>
+    </div>
 
 </div>
 
