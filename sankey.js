@@ -1906,7 +1906,7 @@ function addInput(){
     moveDiffrenceTable();
 
     sequence.push({
-        id: ("input"+numberOfOutputs),
+        id: ("input"+numberOfInputs),
         type: "input"
     });
     numberOfInputs++;
@@ -1965,7 +1965,7 @@ function addSavedInput(value, units){
     moveDiffrenceTable();
 
     sequence.push({
-        id: ("input"+numberOfOutputs),
+        id: ("input"+numberOfInputs),
         type: "input"
     });
     numberOfInputs++;
@@ -2087,26 +2087,28 @@ function deleteOutput(outputNumber){
         }
     }
 
-    var found = false;
-    var top = false;
-    var outputValue = 0;
+    if(sankeyIsMade){
+        var found = false;
+        var top = false;
+        var outputValue = 0;
 
-    for(var i = 0; i < nodeHandles.length; i++){
-        if( nodeHandles[i].id === ("output"+outputNumber)){
-            top = nodeHandles[i].top;
-            outputValue = nodeHandles[i+1].lastValue;
-            nodeHandles.splice(i, 2);
-            found = true;
-        }
-        if(found){
-            nodeHandles[i].x -= 230;
-            if(!top){
-                nodeHandles[i].y += calcDisplayValue(outputValue);
+        for(var i = 0; i < nodeHandles.length; i++){
+            if( nodeHandles[i].id === ("output"+outputNumber)){
+                top = nodeHandles[i].top;
+                outputValue = nodeHandles[i+1].lastValue;
+                nodeHandles.splice(i, 2);
+                found = true;
+            }
+            if(found){
+                nodeHandles[i].x -= 230;
+                if(!top){
+                    nodeHandles[i].y += calcDisplayValue(outputValue);
+                }
             }
         }
-    }
 
-    isNodeHandleDeleted = true;
+        isNodeHandleDeleted = true;
+    }
 
     removeElementByID("output"+outputNumber);
     removeElementByID("output-spanner"+outputNumber);
@@ -2125,26 +2127,28 @@ function deleteInput(inputNumber){
         }
     }
 
-    var found = false;
-    var top = false;
-    var outputValue = 0;
+    if(sankeyIsMade) {
+        var found = false;
+        var top = false;
+        var outputValue = 0;
 
-    for(var i = 0; i < nodeHandles.length; i++){
-        if( nodeHandles[i].id === ("input"+inputNumber)){
-            top = nodeHandles[i].top;
-            outputValue = nodeHandles[i+1].lastValue;
-            nodeHandles.splice(i, 2);
-            found = true;
-        }
-        if(found){
-            nodeHandles[i].x -= 230;
-            if(!top){
-                nodeHandles[i].y -= calcDisplayValue(outputValue);
+        for (var i = 0; i < nodeHandles.length; i++) {
+            if (nodeHandles[i].id === ("input" + inputNumber)) {
+                top = nodeHandles[i].top;
+                outputValue = nodeHandles[i + 1].lastValue;
+                nodeHandles.splice(i, 2);
+                found = true;
+            }
+            if (found) {
+                nodeHandles[i].x -= 230;
+                if (!top) {
+                    nodeHandles[i].y -= calcDisplayValue(outputValue);
+                }
             }
         }
-    }
 
-    isNodeHandleDeleted = true;
+        isNodeHandleDeleted = true;
+    }
 
     removeElementByID("input"+inputNumber);
     removeElementByID("input-spanner"+inputNumber);
@@ -2247,10 +2251,3 @@ function resetSankey(){
     document.getElementById("createSankeyBtn").style.display = null;
     sankeyIsMade = false;
 }
-
-
-
-
-
-
-
