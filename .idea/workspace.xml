@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cca535ab-efa9-44c1-96b3-044ba604ffeb" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/mainWindow.html" afterPath="$PROJECT_DIR$/mainWindow.html" />
-      <change beforePath="$PROJECT_DIR$/sankey.js" afterPath="$PROJECT_DIR$/sankey.js" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/ui-style.css" afterPath="$PROJECT_DIR$/ui-style.css" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -27,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sankey.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sankey.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sankey.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="2247" column="17" lean-forward="true" selection-start-line="2247" selection-start-column="17" selection-end-line="2247" selection-end-column="17" />
+            <state relative-caret-position="704">
+              <caret line="2260" column="64" lean-forward="false" selection-start-line="2260" selection-start-column="64" selection-end-line="2260" selection-end-column="64" />
               <folding>
                 <marker date="1518467588914" expanded="true" signature="6627:6653" ph="..." />
                 <marker date="1518467588914" expanded="true" signature="63124:63879" ph="..." />
@@ -82,6 +82,16 @@
                 <marker date="1518467588914" expanded="true" signature="77808:77833" ph="..." />
                 <marker date="1518467588914" expanded="true" signature="78195:78207" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ui-style.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ui-style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="261">
+              <caret line="185" column="17" lean-forward="true" selection-start-line="185" selection-start-column="17" selection-end-line="185" selection-end-column="17" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -182,6 +192,7 @@
         <option value="$PROJECT_DIR$/main.js" />
         <option value="$PROJECT_DIR$/mainWindow.html" />
         <option value="$PROJECT_DIR$/sankey.js" />
+        <option value="$PROJECT_DIR$/ui-style.css" />
       </list>
     </option>
   </component>
@@ -195,10 +206,10 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1438" />
-    <option name="y" value="119" />
-    <option name="width" value="1237" />
-    <option name="height" value="1021" />
+    <option name="x" value="1329" />
+    <option name="y" value="-3" />
+    <option name="width" value="1871" />
+    <option name="height" value="1203" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -223,6 +234,17 @@
               <item name="Dynamic-Sankey" type="b2602c69:ProjectViewProjectNode" />
               <item name="Dynamic-Sankey" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Dynamic-Sankey" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Dynamic-Sankey" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dynamic-Sankey" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Dynamic-Sankey" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="banners" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -234,7 +256,7 @@
     <property name="nodejs_interpreter_path" value="node" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Dynamic-Sankey-Easy" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -290,12 +312,12 @@
       <workItem from="1518209954421" duration="54000" />
       <workItem from="1518210152476" duration="609000" />
       <workItem from="1518212268004" duration="288000" />
-      <workItem from="1518467509560" duration="89000" />
+      <workItem from="1518467509560" duration="740000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102677000" />
+    <option name="totallyTimeSpent" value="103328000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1329" y="-3" width="1871" height="1203" extended-state="6" />
@@ -306,9 +328,9 @@
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5021075" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15363385" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15363385" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17571297" sideWeight="0.49789253" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17571297" sideWeight="0.49789253" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -333,14 +355,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="31" column="3" lean-forward="false" selection-start-line="31" selection-start-column="3" selection-end-line="31" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sankey.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12278">
@@ -1143,8 +1157,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sankey.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="2247" column="17" lean-forward="true" selection-start-line="2247" selection-start-column="17" selection-end-line="2247" selection-end-column="17" />
+        <state relative-caret-position="704">
+          <caret line="2260" column="64" lean-forward="false" selection-start-line="2260" selection-start-column="64" selection-end-line="2260" selection-end-column="64" />
           <folding>
             <marker date="1518467588914" expanded="true" signature="6627:6653" ph="..." />
             <marker date="1518467588914" expanded="true" signature="63124:63879" ph="..." />
@@ -1195,6 +1209,14 @@
             <marker date="1518467588914" expanded="true" signature="77808:77833" ph="..." />
             <marker date="1518467588914" expanded="true" signature="78195:78207" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui-style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="185" column="17" lean-forward="true" selection-start-line="185" selection-start-column="17" selection-end-line="185" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>

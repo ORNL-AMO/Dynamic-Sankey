@@ -5,15 +5,25 @@ html body{
 }
 
 #header-row .container-fluid .row #banner{
-    background-image: url("./assets/banners/GradientBanner.png");
+    /*background-image: url("./assets/banners/GradientBanner.png");*/
+    background-color: #CCCCCC;
     background-size: cover;
     background-position: center;
-    height: 75px;
+    height: 76px;
     -webkit-box-shadow: 0px 1px 10px 2px rgba(0,0,0,0.5);
     -moz-box-shadow: 0px 1px 10px 2px rgba(0,0,0,0.5);
     box-shadow: 0px 1px 10px 2px rgba(0,0,0,0.5);
     z-index: 8;
     text-align: center;
+}
+
+#doe-banner{
+    width: 302px;
+    height: 76px;
+    background: url("./assets/banners/DOE.png");
+    background-size: 302px 76px;
+    background-repeat: no-repeat;
+    position: absolute;
 }
 
 #header-row .container-fluid .row #banner #banner-title{
@@ -23,7 +33,10 @@ html body{
     text-shadow: 2px 2px #9b9b9b;
     line-height: 75px;
     margin: 0px;
+}
 
+.arrow{
+    filter: drop-shadow( -8px 0 2px hsla(0, 0%, 0%, 0.2));
 }
 
 @font-face {
