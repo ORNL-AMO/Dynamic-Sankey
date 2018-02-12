@@ -419,7 +419,7 @@ function makeNodes(){
                         units: sequence[i].units,
                         type: sequence[i].type,
                         first: false,
-                        lastY: nulls
+                        lastY: null
                     });
                 }
             }
