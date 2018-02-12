@@ -419,7 +419,7 @@ function makeNodes(){
                         units: sequence[i].units,
                         type: sequence[i].type,
                         first: false,
-                        lastY: null
+                        lastY: nulls
                     });
                 }
             }
@@ -428,7 +428,7 @@ function makeNodes(){
             if (sequence[i].type === "output") {
                 //top
                 //give nodes top based top position of the last nodeHandle output or input
-                if ((i*2 < nodeHandles.length && nodeHandles[i*2].top) || ( increaseOfInputsOrOutputs && i*2 == nodeHandles.length && !nodeHandles[nodeHandles.length-2].top)) {
+                if ((i*2 < nodeHandles.length && nodeHandles[i*2].top) || i*2 > nodeHandles.length+1 && !nodes[nodes.length-1].top || ( increaseOfInputsOrOutputs && i*2 == nodeHandles.length && !nodeHandles[nodeHandles.length-2].top)) {
                     nodes.push({
                         name: "inter #" + i,
                         id: sequence[i].id,
@@ -505,7 +505,7 @@ function makeNodes(){
             }
             else if(sequence[i].type === "input"){
                 //top
-                if ((i*2 < nodeHandles.length && nodeHandles[i*2].top) || ( increaseOfInputsOrOutputs && i*2 == nodeHandles.length&& !nodeHandles[nodeHandles.length-2].top)) {
+                if ((i*2 < nodeHandles.length && nodeHandles[i*2].top) || i*2 > nodeHandles.length+1 && !nodes[nodes.length-1].top || ( increaseOfInputsOrOutputs && i*2 == nodeHandles.length&& !nodeHandles[nodeHandles.length-2].top)) {
                     nodes.push({
                         name: "inter #" + i,
                         id: sequence[i].id,
@@ -683,14 +683,31 @@ function updateNodeHandles(){
             var tmpX = nodeHandles[nodeHandles.length-1].x;
             var tmpY = nodeHandles[nodeHandles.length-1].y;
 
+            var newNodeCount = 0;
+            var shitfX = 0;
+
+            if(nodes[nodeHandles.length - 5].top){
+                shitfX = nodeHandles[nodeHandles.length - 3].x - (400 + (((nodeHandles.length - 2)/2) - 1) * 230);
+            }
+            else{
+                console.log((400 + (((nodeHandles.length - 2)/2) - 1) * 230));
+                shitfX = nodeHandles[nodeHandles.length - 3].x - (450 + (((nodeHandles.length - 2)/2) - 1) * 230);
+            }
+
+            console.log(nodeHandles);
+            console.log(nodes);
+
+            console.log(shitfX);
             //Remove the last difference node
             nodeHandles.pop();
             for (var x = lastLength-1; x < nodes.length; x++) {
                 addNodeHandle(x);
+                newNodeCount++;
+                nodeHandles[x].x += shitfX;
             }
 
             //Add back in the difference node and apply its previous changes
-            nodeHandles[nodeHandles.length-1].x = tmpX + 230;
+            nodeHandles[nodeHandles.length-1].x = tmpX + 230 * ((newNodeCount-1)/2) + shitfX;
 
             //Shift difference depending on type and if it is top or bottom
             if(nodes[nodes.length-2].type === "output"){
@@ -793,7 +810,7 @@ function zoomed() {
     lastTransformY = d3.event.transform.y;
     lastTransformK = d3.event.transform.k;
 
-    d3.select('svg').select('g').attr('transform', 'translate(' + d3.event.transform.x + ',' + d3.event.transform.y + ') scale(' + d3.event.transform.k + ')');
+    d3.select('#sankey-svg').select('g').attr('transform', 'translate(' + d3.event.transform.x + ',' + d3.event.transform.y + ') scale(' + d3.event.transform.k + ')');
 }
 
 
@@ -1994,7 +2011,7 @@ function getOutput(i){
 
     var elements = document.getElementsByClassName("output");
 
-    var ouput = ({
+    var output = ({
         id: elements[i].id,
         type: "output",
         name: elements[i].childNodes[0].textContent,
@@ -2002,7 +2019,11 @@ function getOutput(i){
         units: elements[i].childNodes[2].childNodes[1].value
     });
 
-    return ouput;
+    if(output.value === ""){
+        output.value = 0;
+    }
+
+    return output;
 }
 
 function getInput(i){
@@ -2016,6 +2037,10 @@ function getInput(i){
         value: elements[i].childNodes[1].childNodes[0].value,
         units: elements[i].childNodes[2].childNodes[1].value
     });
+
+    if(input.value === ""){
+        input.value = 0;
+    }
 
     return input;
 }
@@ -2087,21 +2112,21 @@ function deleteOutput(outputNumber){
         }
     }
 
-    if(sankeyIsMade){
+    if(sankeyIsMade) {
         var found = false;
         var top = false;
         var outputValue = 0;
 
-        for(var i = 0; i < nodeHandles.length; i++){
-            if( nodeHandles[i].id === ("output"+outputNumber)){
+        for (var i = 0; i < nodeHandles.length; i++) {
+            if (nodeHandles[i].id === ("output" + outputNumber)) {
                 top = nodeHandles[i].top;
-                outputValue = nodeHandles[i+1].lastValue;
+                outputValue = nodeHandles[i + 1].lastValue;
                 nodeHandles.splice(i, 2);
                 found = true;
             }
-            if(found){
+            if (found) {
                 nodeHandles[i].x -= 230;
-                if(!top){
+                if (!top) {
                     nodeHandles[i].y += calcDisplayValue(outputValue);
                 }
             }
@@ -2127,21 +2152,21 @@ function deleteInput(inputNumber){
         }
     }
 
-    if(sankeyIsMade) {
+    if(sankeyIsMade){
         var found = false;
         var top = false;
         var outputValue = 0;
 
-        for (var i = 0; i < nodeHandles.length; i++) {
-            if (nodeHandles[i].id === ("input" + inputNumber)) {
+        for(var i = 0; i < nodeHandles.length; i++){
+            if( nodeHandles[i].id === ("input"+inputNumber)){
                 top = nodeHandles[i].top;
-                outputValue = nodeHandles[i + 1].lastValue;
+                outputValue = nodeHandles[i+1].lastValue;
                 nodeHandles.splice(i, 2);
                 found = true;
             }
-            if (found) {
+            if(found){
                 nodeHandles[i].x -= 230;
-                if (!top) {
+                if(!top){
                     nodeHandles[i].y -= calcDisplayValue(outputValue);
                 }
             }
