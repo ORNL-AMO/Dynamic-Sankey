@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cca535ab-efa9-44c1-96b3-044ba604ffeb" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/sankey.js" afterPath="$PROJECT_DIR$/sankey.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -27,11 +26,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sankey.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sankey.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sankey.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="409" column="49" lean-forward="true" selection-start-line="409" selection-start-column="49" selection-end-line="409" selection-end-column="49" />
+            <state relative-caret-position="78">
+              <caret line="407" column="47" lean-forward="true" selection-start-line="407" selection-start-column="47" selection-end-line="407" selection-end-column="47" />
               <folding>
                 <marker date="1518469018650" expanded="true" signature="6627:6653" ph="..." />
                 <marker date="1518469018650" expanded="true" signature="63123:63878" ph="..." />
@@ -82,6 +81,16 @@
                 <marker date="1518469018650" expanded="true" signature="77807:77832" ph="..." />
                 <marker date="1518469018650" expanded="true" signature="78194:78206" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="154">
+              <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -145,7 +154,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>deleteOutp</find>
       <find>addNode</find>
       <find>nodeHandles</find>
       <find>nodeHandles[i].name</find>
@@ -175,6 +183,7 @@
       <find>updateNod</find>
       <find>calcSankey</find>
       <find>update</find>
+      <find>nulls</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -193,6 +202,7 @@
         <option value="$PROJECT_DIR$/mainWindow.html" />
         <option value="$PROJECT_DIR$/ui-style.css" />
         <option value="$PROJECT_DIR$/sankey.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -256,7 +266,7 @@
     <property name="nodejs_interpreter_path" value="node" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../AMO-Tools-Desktop" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -313,12 +323,12 @@
       <workItem from="1518210152476" duration="609000" />
       <workItem from="1518212268004" duration="288000" />
       <workItem from="1518467509560" duration="1317000" />
-      <workItem from="1518469011353" duration="55000" />
+      <workItem from="1518469011353" duration="1106000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103960000" />
+    <option name="totallyTimeSpent" value="105011000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1329" y="-3" width="1871" height="1203" extended-state="6" />
@@ -356,63 +366,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sankey.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12278">
-          <caret line="877" column="21" lean-forward="false" selection-start-line="877" selection-start-column="21" selection-end-line="877" selection-end-column="21" />
-          <folding>
-            <marker date="1518469018650" expanded="true" signature="6627:6653" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="63123:63878" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="63937:63968" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="64018:64135" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="64178:64215" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="64292:64304" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="64460:64471" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="64552:64567" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="64774:64799" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="64920:64951" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="65043:65071" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="65177:65195" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="65517:65528" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="65608:65623" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="65832:65857" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="65978:66009" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="66101:66129" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="66236:66254" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="66641:66708" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="66785:66825" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="67061:67077" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="67808:67820" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="69638:69653" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="69898:69910" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="69965:69997" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="70097:70122" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="70470:70482" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="71538:71553" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="71798:71810" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="71885:71917" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="72017:72042" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="72390:72402" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="73499:73514" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="73763:73848" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="74156:74168" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="74342:74357" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="74606:74691" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="74751:74783" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="74885:74910" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="75272:75284" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="76364:76379" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="76628:76713" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="77040:77052" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="77245:77260" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="77509:77594" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="77673:77705" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="77807:77832" ph="..." />
-            <marker date="1518469018650" expanded="true" signature="78194:78206" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
@@ -1166,8 +1119,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sankey.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="409" column="49" lean-forward="true" selection-start-line="409" selection-start-column="49" selection-end-line="409" selection-end-column="49" />
+        <state relative-caret-position="78">
+          <caret line="407" column="47" lean-forward="true" selection-start-line="407" selection-start-column="47" selection-end-line="407" selection-end-column="47" />
           <folding>
             <marker date="1518469018650" expanded="true" signature="6627:6653" ph="..." />
             <marker date="1518469018650" expanded="true" signature="63123:63878" ph="..." />
@@ -1218,6 +1171,14 @@
             <marker date="1518469018650" expanded="true" signature="77807:77832" ph="..." />
             <marker date="1518469018650" expanded="true" signature="78194:78206" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
