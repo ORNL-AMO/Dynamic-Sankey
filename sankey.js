@@ -686,18 +686,24 @@ function updateNodeHandles(){
             var newNodeCount = 0;
             var shitfX = 0;
 
-            if(nodes[nodeHandles.length - 5].top){
-                shitfX = nodeHandles[nodeHandles.length - 3].x - (400 + (((nodeHandles.length - 2)/2) - 1) * 230);
+            if(nodeHandles.length > 4){
+                if(nodes[nodeHandles.length - 5].top){
+                    shitfX = nodeHandles[nodeHandles.length - 3].x - (400 + (((nodeHandles.length - 2)/2) - 1) * 230);
+                }
+                else{
+                    shitfX = nodeHandles[nodeHandles.length - 3].x - (450 + (((nodeHandles.length - 2)/2) - 1) * 230);
+                }
             }
             else{
-                console.log((400 + (((nodeHandles.length - 2)/2) - 1) * 230));
-                shitfX = nodeHandles[nodeHandles.length - 3].x - (450 + (((nodeHandles.length - 2)/2) - 1) * 230);
+                if(nodes[nodeHandles.length - 3].top){
+                    shitfX = nodeHandles[nodeHandles.length - 3].x - (400 + (((nodeHandles.length - 2)/2) - 1) * 230);
+                }
+                else{
+                    shitfX = nodeHandles[nodeHandles.length - 3].x - (450 + (((nodeHandles.length - 2)/2) - 1) * 230);
+                }
             }
 
-            console.log(nodeHandles);
-            console.log(nodes);
 
-            console.log(shitfX);
             //Remove the last difference node
             nodeHandles.pop();
             for (var x = lastLength-1; x < nodes.length; x++) {
