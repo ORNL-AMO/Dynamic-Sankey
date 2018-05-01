@@ -40,10 +40,10 @@ var mydragg = function(){
                 posY = evt.clientY,
                 divTop = divid.style.top,
                 divLeft = divid.style.left,
-                eWi = parseInt(divid.style.width),
-                eHe = parseInt(divid.style.height),
-                cWi = parseInt(document.getElementById(container).style.width),
-                cHe = parseInt(document.getElementById(container).style.height);
+                eWi = parseFloat(divid.style.width),
+                eHe = parseFloat(divid.style.height),
+                cWi = parseFloat(document.getElementById(container).style.width),
+                cHe = parseFloat(document.getElementById(container).style.height);
             document.getElementById(container).style.cursor='move';
             divTop = divTop.replace('px','');
             divLeft = divLeft.replace('px','');
@@ -220,8 +220,8 @@ function initDrag(e, elem) {
     element = elem;
     startX = e.clientX;
     startY = e.clientY;
-    startWidth = parseInt(document.defaultView.getComputedStyle(element).width, 10);
-    startHeight = parseInt(document.defaultView.getComputedStyle(element).height, 10);
+    startWidth = parseFloat(document.defaultView.getComputedStyle(element).width, 10);
+    startHeight = parseFloat(document.defaultView.getComputedStyle(element).height, 10);
     document.documentElement.addEventListener('mousemove', doDrag, false);
     document.documentElement.addEventListener('mouseup', stopDrag, false);
 }
@@ -623,8 +623,6 @@ function makeNodes(){
             lastY: null
         });
     }
-    //console.log(nodes);
-
 }
 
 function linkNodes(){
@@ -851,7 +849,7 @@ function updateSankeySVG(){
 
 function calcSankey() {
 
-    var diffrenceValue = parseInt(nodes[0].value);
+    var diffrenceValue = parseFloat(nodes[0].value);
 
     nodes[0].y = (400 - nodes[0].displaySize / 2);
 
@@ -861,7 +859,7 @@ function calcSankey() {
             if (i == 1) {
                 //First interNode
                 if (nodes[i + 1] != null && nodes[i + 1].type === "input") {
-                    d.value = (parseInt(nodes[i - 1].value) + parseInt(nodes[i + 1].value));
+                    d.value = (parseFloat(nodes[i - 1].value) + parseFloat(nodes[i + 1].value));
                     d.displaySize = calcDisplayValue(d.value);
                 }
                 else {
@@ -871,11 +869,11 @@ function calcSankey() {
             }
             else {
                 if (nodes[i + 1].type === "input") {
-                    d.value = (parseInt(nodes[i - 2].value) + parseInt(nodes[i + 1].value));
+                    d.value = (parseFloat(nodes[i - 2].value) + parseFloat(nodes[i + 1].value));
                     d.displaySize = calcDisplayValue(d.value);
                 }
                 else {
-                    d.value = (parseInt(nodes[i - 2].value) - parseInt(nodes[i + 1].value));
+                    d.value = (parseFloat(nodes[i - 2].value) - parseFloat(nodes[i + 1].value));
                     d.displaySize = calcDisplayValue(d.value);
                 }
             }
@@ -883,6 +881,8 @@ function calcSankey() {
         else {
             if (!d.input) {
                 if (d.difference) {
+                    //This is where difference is calculated
+                    diffrenceValue = diffrenceValue.toFixed(6);
                     d.value = diffrenceValue;
                     d.displaySize = calcDisplayValue(d.value);
 
@@ -891,11 +891,13 @@ function calcSankey() {
                 else {
                     if (d.top) {
                         d.displaySize = calcDisplayValue(d.value);
-                        diffrenceValue -= parseInt(d.value);
+                        diffrenceValue -= parseFloat(d.value);
+                        console.log(diffrenceValue);
                     }
                     else {
                         d.displaySize = calcDisplayValue(d.value);
-                        diffrenceValue -= parseInt(d.value);
+                        diffrenceValue -= parseFloat(d.value);
+                        console.log(diffrenceValue);
                     }
                 }
             }
@@ -903,11 +905,13 @@ function calcSankey() {
                 if (!d.first) {
                     if (d.top) {
                         d.displaySize = calcDisplayValue(d.value);
-                        diffrenceValue += parseInt(d.value);
+                        diffrenceValue += parseFloat(d.value);
+                        console.log(diffrenceValue);
                     }
                     else {
                         d.displaySize = calcDisplayValue(d.value);
-                        diffrenceValue += parseInt(d.value);
+                        diffrenceValue += parseFloat(d.value);
+                        console.log(diffrenceValue);
                     }
                 }
             }
@@ -2021,7 +2025,7 @@ function getOutput(i){
         id: elements[i].id,
         type: "output",
         name: elements[i].childNodes[0].textContent,
-        value: elements[i].childNodes[1].childNodes[0].value,
+        value: elements[i].childNodes[1].childNodes[0].value.replace(/,/g,""),
         units: elements[i].childNodes[2].childNodes[1].value
     });
 
@@ -2040,7 +2044,7 @@ function getInput(i){
         id: elements[i].id,
         type: "input",
         name: elements[i].childNodes[0].textContent,
-        value: elements[i].childNodes[1].childNodes[0].value,
+        value: elements[i].childNodes[1].childNodes[0].value.replace(/,/g,""),
         units: elements[i].childNodes[2].childNodes[1].value
     });
 
@@ -2060,10 +2064,12 @@ function loadOutputs(){
     for(var i = 0; i < elements.length; i++){
         outputs.push({
             name: elements[i].childNodes[0].textContent,
-            value: elements[i].childNodes[1].childNodes[0].value,
+            value: elements[i].childNodes[1].childNodes[0].value.replace(/,/g,""),
             units: elements[i].childNodes[2].childNodes[1].value
         });
     }
+
+    console.log(outputs);
 
     update();
 
@@ -2078,11 +2084,12 @@ function loadInputs(){
     for(var i = 0; i < elements.length; i++){
         inputs.push({
             name: elements[i].childNodes[0].textContent,
-            value: elements[i].childNodes[1].childNodes[0].value,
+            value: elements[i].childNodes[1].childNodes[0].value.replace(/,/g,""),
             units: elements[i].childNodes[2].childNodes[1].value
         });
     }
 
+    console.log(inputs);
     update();
 }
 
