@@ -2195,6 +2195,7 @@ function deleteInput(inputNumber){
 }
 
 function update(){
+    checkForValidSankeyMake();
     if(sankeyIsMade) {
         makeSankey('#sankey-display', false);
     }
@@ -2273,6 +2274,37 @@ function onReaderLoad(event){
 function checkForValidClear(){
     if((numberOfInputs != 0 && numberOfInputs != null) || (numberOfOutputs != 0 && numberOfOutputs != null)){
         $("#clearSankeyModal").modal()
+    }
+}
+
+function checkForValidSankeyMake(){
+
+    console.log(inputs);
+    console.log(outputs);
+    var check = true;
+
+    if(inputs.length == 0){
+        check = false;
+    }
+
+    if(inputs.length == 1 && outputs.length == 0){
+        check = false;
+    }
+
+    for(var i = 0; i < inputs.length; i++){
+        if(inputs[i].value == ""){
+            check = false;
+        }
+    }
+
+    for(var i = 0; i < outputs.length; i++){
+        if(outputs[i].value == ""){
+            check = false;
+        }
+    }
+
+    if(check) {
+        document.getElementById("createSankeyBtn").disabled = false;
     }
 }
 
