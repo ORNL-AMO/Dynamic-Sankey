@@ -805,17 +805,31 @@ var zoom = d3.zoom()
     .scaleExtent([.25, 100])
     .on("zoom", zoomed);
 
+
 var lastTransformX = 1;
 var lastTransformY = 1;
 var lastTransformK = 1;
 
+
 function zoomed() {
+
     lastTransformX = d3.event.transform.x;
     lastTransformY = d3.event.transform.y;
     lastTransformK = d3.event.transform.k;
 
     d3.select('#sankey-svg').select('g').attr('transform', 'translate(' + d3.event.transform.x + ',' + d3.event.transform.y + ') scale(' + d3.event.transform.k + ')');
 }
+
+function recenterAndResize(){
+
+    d3.select('#sankey-svg').call(zoom.transform, d3.zoomIdentity.scale(1));
+
+    lastTransformX = 1;
+    lastTransformY = 1;
+    lastTransformK = 1;
+
+}
+
 
 
 function makeSankeySVG(location){
