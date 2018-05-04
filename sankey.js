@@ -1,8 +1,8 @@
-var d3;
+
 var svg;
 
 const width = document.getElementById("sankey-display").offsetWidth,
-    height = document.getElementById("sankey-display").offsetHeight;
+      height = document.getElementById("sankey-display").offsetHeight;
 
 const baseSize = 100;
 
@@ -105,7 +105,7 @@ function handleFileSelect(evt){
 
                 var imageContainer = document.createElement('div');
 
-                imageContainer.id = 'imageContainer';
+                imageContainer.id = 'imageContainer' + imageCount;
                 imageContainer.className += "imageContainer";
                 if(isBtnInput){
                     imageContainer.style.left = "0px";
@@ -126,7 +126,7 @@ function handleFileSelect(evt){
                 imageContainer.appendChild(image);
 
                 image.src = e.target.result;
-                image.id = "image";
+                image.id = "image" + imageCount;
                 image.style.width = "100%";
                 image.style.height = "100%";
 
@@ -178,8 +178,22 @@ function handleFileSelect(evt){
                 var span = document.createElement('span');
                 span.id = "thumb"+imageCount;
                 span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                    '" title="', escape(theFile.name), '"/><button class="btn btn-secondary btn-pop" title="edit" onclick="$(span  ).remove();" style="background-color: #d4161c;"><i class="glyphicon glyphicon-minus"></i></button><br>'].join('');
+                                        '" title="', escape(theFile.name), '"/><button class="btn btn-secondary btn-pop" title="edit" onclick="removeImage(' + imageCount + ');" style="background-color: #d4161c;"><i class="glyphicon glyphicon-minus"></i></button><br>'].join('');
                 document.getElementById('list').insertBefore(span, null);
+
+                /*
+                var span = document.createElement('span');
+                span.id = "thumb"+imageCount;
+                span.innerHTML = [  '<div style="width: 40px;">' +
+                                        '</div><span class="glyphicon glyphicon-arrow-up" style="font-size: 25px; position: absolute;"></span>' +
+                                        '</div><span class="glyphicon glyphicon-arrow-up" style="font-size: 25px; position: absolute;"></span>' +
+                                    '</div>' +
+                                    '' +
+                                    '<img class="thumb" src="', e.target.result,
+                                        '" title="', escape(theFile.name), '"/><button class="btn btn-secondary btn-pop" title="edit" onclick="removeImage(' + imageCount + ');" style="background-color: #d4161c;"><i class="glyphicon glyphicon-minus"></i></button><br>'].join('');
+                document.getElementById('list').insertBefore(span, null);
+                 */
+
                 imageCount++;
             };
         })(f);
@@ -192,6 +206,12 @@ function handleFileSelect(evt){
     if(isBtnInput){
         document.getElementById('selectImageInput').value = "";
     }
+}
+
+function removeImage(number){
+    $("#image" + number).remove();
+    $("#imageContainer"+number).remove();
+    $("#thumb"+number).remove();
 }
 
 function removeThumb(number){
@@ -827,10 +847,7 @@ function recenterAndResize(){
     lastTransformX = 1;
     lastTransformY = 1;
     lastTransformK = 1;
-
 }
-
-
 
 function makeSankeySVG(location){
 

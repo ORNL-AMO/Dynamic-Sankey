@@ -13,11 +13,11 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "d3": "4.12.2 ",
     "electron": "^1.7.9",
     "jquery": "^3.2.1",
     "material-design-icons": "^3.0.1",
-    "spectrum-colorpicker": "^1.8.0",
-    "d3": "4.12.2 "
+    "spectrum-colorpicker": "^1.8.0"
   },
   "devDependencies": {
     "electron-packager": "^9.1.0"
