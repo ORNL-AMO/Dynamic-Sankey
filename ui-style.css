@@ -127,7 +127,7 @@ html body{
     user-select: none;
 }
 
-#imageContainer{
+.imageContainer{
     position: absolute;
     -webkit-user-select: none;
     -moz-user-select: none;
