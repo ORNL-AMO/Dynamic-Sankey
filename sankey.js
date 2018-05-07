@@ -183,18 +183,17 @@ function handleFileSelect(evt){
                                         '" title="', escape(theFile.name), '"/><button class="btn btn-secondary btn-pop" title="edit" onclick="removeImage(' + imageCount + ');" style="background-color: #d4161c;"><i class="glyphicon glyphicon-minus"></i></button><br>'].join('');
                 document.getElementById('list').insertBefore(span, null);
 
-                /*
-                var span = document.createElement('span');
-                span.id = "thumb"+imageCount;
-                span.innerHTML = [  '<div style="width: 40px;">' +
-                                        '</div><span class="glyphicon glyphicon-arrow-up" style="font-size: 25px; position: absolute;"></span>' +
-                                        '</div><span class="glyphicon glyphicon-arrow-up" style="font-size: 25px; position: absolute;"></span>' +
-                                    '</div>' +
-                                    '' +
-                                    '<img class="thumb" src="', e.target.result,
-                                        '" title="', escape(theFile.name), '"/><button class="btn btn-secondary btn-pop" title="edit" onclick="removeImage(' + imageCount + ');" style="background-color: #d4161c;"><i class="glyphicon glyphicon-minus"></i></button><br>'].join('');
-                document.getElementById('list').insertBefore(span, null);
-                 */
+
+                // var span = document.createElement('span');
+                // span.id = "thumb"+imageCount;
+                // span.innerHTML = [  '<span class="glyphicon glyphicon-arrow-up" style="font-size: 25px; color: #ff7226; cursor: pointer;" onclick="moveUpImage(imageCount)"></span>' +
+                //                     '<span class="glyphicon glyphicon-arrow-down" style="font-size: 25px; padding-right: 10px; color: #ff7226; cursor: pointer;" onclick="moveDownImage(imageCount)"></span>' +
+                //                     '' +
+                //                     '<img class="thumb" src="', e.target.result,
+                //                         '" title="', escape(theFile.name), '"/><button class="btn btn-secondary btn-pop" title="edit" onclick="removeImage(' + imageCount + ');" style="background-color: #d4161c;"><i class="glyphicon glyphicon-minus"></i></button><br>'].join('');
+
+                //document.getElementById('list').insertBefore(span, null);
+
 
                 imageCount++;
             };
@@ -208,6 +207,15 @@ function handleFileSelect(evt){
     if(isBtnInput){
         document.getElementById('selectImageInput').value = "";
     }
+}
+
+
+function moveUpImage(number){
+
+}
+
+function moveDownImage(number){
+
 }
 
 function removeImage(number){
