@@ -28,6 +28,8 @@ var sequence;
 
 var columns = 0;
 
+var decimalPlaces = 0;
+
 var mydragg = function(){
     return {
         move : function(divid,xpos,ypos){
@@ -913,7 +915,8 @@ function calcSankey() {
             if (!d.input) {
                 if (d.difference) {
                     //This is where difference is calculated
-                    diffrenceValue = diffrenceValue.toFixed(6);
+                    console.log(decimalPlaces);
+                    diffrenceValue = diffrenceValue.toFixed(decimalPlaces);
                     d.value = diffrenceValue;
                     d.displaySize = calcDisplayValue(d.value);
 
@@ -2035,6 +2038,8 @@ function loadSequence(){
     var inputCount = 0;
     var outputCount = 0;
 
+    decimalPlaces = 0;
+
     for(var i = 0; i < sequence.length; i++){
         if(sequence[i].type === "input"){
             sequence[i] = getInput(inputCount);
@@ -2045,7 +2050,6 @@ function loadSequence(){
             outputCount++;
         }
     }
-
 }
 
 function getOutput(i){
@@ -2062,6 +2066,13 @@ function getOutput(i){
 
     if(output.value === ""){
         output.value = 0;
+    }
+
+    if (output.value.toString().indexOf('.') > -1) {
+        var stringDecimalPlace = output.value.toString().length - output.value.toString().indexOf('.');
+        if(stringDecimalPlace > decimalPlaces){
+            decimalPlaces = stringDecimalPlace;
+        }
     }
 
     return output;
@@ -2083,6 +2094,14 @@ function getInput(i){
         input.value = 0;
     }
 
+    if (input.value.toString().indexOf('.') > -1) {
+        var stringDecimalPlace = input.value.toString().length - input.value.toString().indexOf('.');
+        if(stringDecimalPlace > decimalPlaces){
+            decimalPlaces = stringDecimalPlace;
+        }
+    }
+
+
     return input;
 }
 
@@ -2098,9 +2117,13 @@ function loadOutputs(){
             value: elements[i].childNodes[1].childNodes[0].value.replace(/,/g,""),
             units: elements[i].childNodes[2].childNodes[1].value
         });
+        if (outputs[i].toString().indexOf('.') > -1) {
+            var stringDecimalPlace = outputs[i].value.toString().length - outputs[i].value.toString().indexOf('.');
+            if(stringDecimalPlace > decimalPlaces){
+                decimalPlaces = stringDecimalPlace;
+            }
+        }
     }
-
-    console.log(outputs);
 
     update();
 
@@ -2118,9 +2141,15 @@ function loadInputs(){
             value: elements[i].childNodes[1].childNodes[0].value.replace(/,/g,""),
             units: elements[i].childNodes[2].childNodes[1].value
         });
+        if (inputs[i].toString().indexOf('.') > -1) {
+            var stringDecimalPlace = inputs[i].value.toString().length - inputs[i].value.toString().indexOf('.');
+            if(stringDecimalPlace > decimalPlaces){
+                decimalPlaces = stringDecimalPlace;
+            }
+        }
     }
 
-    console.log(inputs);
+
     update();
 }
 
@@ -2310,8 +2339,6 @@ function checkForValidClear(){
 
 function checkForValidSankeyMake(){
 
-    console.log(inputs);
-    console.log(outputs);
     var check = true;
 
     if(inputs.length == 0){
@@ -2351,4 +2378,5 @@ function resetSankey(){
     makeSankeyForm();
     document.getElementById("createSankeyBtn").style.display = null;
     sankeyIsMade = false;
+    decimalPlaces = 0;
 }
