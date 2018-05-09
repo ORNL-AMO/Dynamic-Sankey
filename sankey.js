@@ -76,7 +76,11 @@ var eventY;
 
 var imageCount = 0;
 
+var fileStorage = [];
+var order = [];
+
 function handleFileSelect(evt){
+
     evt.stopPropagation();
     evt.preventDefault();
 
@@ -92,8 +96,9 @@ function handleFileSelect(evt){
     }
 
     // files is a FileList of File objects. List some properties.
-    var output = [];
     for (var i = 0, f; f = files[i]; i++) {
+        fileStorage[fileStorage.length] = files[i];
+        order[order.length] = imageCount;
         // Only process image files.
         if (!f.type.match('image.*')) {
             continue;
@@ -122,6 +127,7 @@ function handleFileSelect(evt){
                 imageContainer.style.height = "100px";
                 imageContainer.onmousedown = function(){mydragg.startMoving(imageContainer,'sankey-display',event)};
                 imageContainer.onmouseup = function(){mydragg.stopMoving('sankey-display')};
+                imageContainer.style.zIndex = imageCount;
 
                 var image = document.createElement("img");
 
@@ -177,22 +183,22 @@ function handleFileSelect(evt){
                 //document.getElementById("sankey-display").style.backgroundImage = "url('" + e.target.result + "')";
 
                 // Render thumbnail.
-                var span = document.createElement('span');
-                span.id = "thumb"+imageCount;
-                span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                                        '" title="', escape(theFile.name), '"/><button class="btn btn-secondary btn-pop" title="edit" onclick="removeImage(' + imageCount + ');" style="background-color: #d4161c;"><i class="glyphicon glyphicon-minus"></i></button><br>'].join('');
-                document.getElementById('list').insertBefore(span, null);
-
-
                 // var span = document.createElement('span');
                 // span.id = "thumb"+imageCount;
-                // span.innerHTML = [  '<span class="glyphicon glyphicon-arrow-up" style="font-size: 25px; color: #ff7226; cursor: pointer;" onclick="moveUpImage(imageCount)"></span>' +
-                //                     '<span class="glyphicon glyphicon-arrow-down" style="font-size: 25px; padding-right: 10px; color: #ff7226; cursor: pointer;" onclick="moveDownImage(imageCount)"></span>' +
-                //                     '' +
-                //                     '<img class="thumb" src="', e.target.result,
+                // span.innerHTML = ['<img class="thumb" src="', e.target.result,
                 //                         '" title="', escape(theFile.name), '"/><button class="btn btn-secondary btn-pop" title="edit" onclick="removeImage(' + imageCount + ');" style="background-color: #d4161c;"><i class="glyphicon glyphicon-minus"></i></button><br>'].join('');
+                // document.getElementById('list').insertBefore(span, null);
 
-                //document.getElementById('list').insertBefore(span, null);
+                var span = document.createElement('span');
+                span.id = "thumb"+imageCount;
+                span.className = "image-span";
+                span.innerHTML = [  '<span class="glyphicon glyphicon-arrow-up" style="font-size: 25px; color: #ff7226; cursor: pointer;" onclick="moveUpImage(' + imageCount + ')"></span>' +
+                                    '<span class="glyphicon glyphicon-arrow-down" style="font-size: 25px; padding-right: 10px; color: #ff7226; cursor: pointer;" onclick="moveDownImage(' + imageCount + ')"></span>' +
+                                    '' +
+                                    '<img class="thumb" src="', e.target.result,
+                                        '" title="', escape(theFile.name), '"/><button class="btn btn-secondary btn-pop" title="edit" onclick="removeImage(' + imageCount + ');" style="background-color: #d4161c;"><i class="glyphicon glyphicon-minus"></i></button><br>'].join('');
+
+                document.getElementById('list').insertBefore(span, document.getElementById('list').firstChild);
 
 
                 imageCount++;
@@ -212,16 +218,39 @@ function handleFileSelect(evt){
 
 function moveUpImage(number){
 
+
+    console.log("moveUpImage");
+
+    if(document.getElementById("imageContainer" + number).nextSibling != null) {
+        $("#thumb" + number).after($(document.getElementById("thumb" + number).previousSibling));
+
+        var temp = document.getElementById("imageContainer" + number).style.zIndex;
+        document.getElementById("imageContainer" + number).style.zIndex = document.getElementById("imageContainer" + number).nextSibling.style.zIndex;
+        document.getElementById("imageContainer" + number).nextSibling.style.zIndex = temp;
+        $("#imageContainer" + number).before($(document.getElementById("imageContainer" + number).nextSibling));
+    }
+    //}
 }
 
 function moveDownImage(number){
 
+    console.log("moveDownImage");
+
+    if(document.getElementById("imageContainer" + number).previousSibling != null) {
+        $("#thumb" + number).before($(document.getElementById("thumb" + number).nextSibling));
+
+        var temp = document.getElementById("imageContainer" + number).style.zIndex;
+        document.getElementById("imageContainer" + number).style.zIndex = document.getElementById("imageContainer" + number).previousSibling.style.zIndex;
+        document.getElementById("imageContainer" + number).previousSibling.style.zIndex = temp;
+        $("#imageContainer" + number).after($(document.getElementById("imageContainer" + number).previousSibling));
+    }
 }
 
 function removeImage(number){
     $("#image" + number).remove();
     $("#imageContainer"+number).remove();
     $("#thumb"+number).remove();
+    fileStorage.splice(number, 1);
 }
 
 function removeThumb(number){
@@ -239,7 +268,7 @@ var dropZone = document.getElementById('sankey-display');
 dropZone.addEventListener('dragover', handleDragOver, false);
 dropZone.addEventListener('drop', handleFileSelect, false);
 
-var inputBtn = document.getElementById('selectImageInput');
+var inputBtn = document.getElementById('selecltImageInput');
 inputBtn.onclick = addEventListener('change', handleFileSelect, false);
 inputBtn.onchange = addEventListener('change', handleFileSelect, false);
 
@@ -923,7 +952,6 @@ function calcSankey() {
             if (!d.input) {
                 if (d.difference) {
                     //This is where difference is calculated
-                    console.log(decimalPlaces);
                     diffrenceValue = diffrenceValue.toFixed(decimalPlaces);
                     d.value = diffrenceValue;
                     d.displaySize = calcDisplayValue(d.value);
@@ -934,12 +962,10 @@ function calcSankey() {
                     if (d.top) {
                         d.displaySize = calcDisplayValue(d.value);
                         diffrenceValue -= parseFloat(d.value);
-                        console.log(diffrenceValue);
                     }
                     else {
                         d.displaySize = calcDisplayValue(d.value);
                         diffrenceValue -= parseFloat(d.value);
-                        console.log(diffrenceValue);
                     }
                 }
             }
@@ -948,12 +974,10 @@ function calcSankey() {
                     if (d.top) {
                         d.displaySize = calcDisplayValue(d.value);
                         diffrenceValue += parseFloat(d.value);
-                        console.log(diffrenceValue);
                     }
                     else {
                         d.displaySize = calcDisplayValue(d.value);
                         diffrenceValue += parseFloat(d.value);
-                        console.log(diffrenceValue);
                     }
                 }
             }
@@ -2343,6 +2367,11 @@ function checkForValidClear(){
     if((numberOfInputs != 0 && numberOfInputs != null) || (numberOfOutputs != 0 && numberOfOutputs != null)){
         $("#clearSankeyModal").modal()
     }
+    else{   //Images without a sankey is a valid removal for images
+        d3.selectAll(".image-span").remove();
+        d3.selectAll(".imageContainer").remove();
+        imageCount = 0;
+    }
 }
 
 function checkForValidSankeyMake(){
@@ -2375,6 +2404,7 @@ function checkForValidSankeyMake(){
 }
 
 function resetSankey(){
+    console.log("HERE");
     $("#sankey-form").remove();
     $("#sankey-display").html('');
     numberOfInputs = 0;
@@ -2387,4 +2417,7 @@ function resetSankey(){
     document.getElementById("createSankeyBtn").style.display = null;
     sankeyIsMade = false;
     decimalPlaces = 0;
+    d3.selectAll(".image-span").remove();
+    d3.selectAll(".imageContainer").remove();
+    imageCount = 0;
 }
