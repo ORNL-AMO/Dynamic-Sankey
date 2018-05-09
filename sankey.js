@@ -77,6 +77,7 @@ var eventY;
 var imageCount = 0;
 
 var fileStorage = [];
+var order = [];
 
 function handleFileSelect(evt){
 
@@ -97,6 +98,7 @@ function handleFileSelect(evt){
     // files is a FileList of File objects. List some properties.
     for (var i = 0, f; f = files[i]; i++) {
         fileStorage[fileStorage.length] = files[i];
+        order[order.length] = imageCount;
         // Only process image files.
         if (!f.type.match('image.*')) {
             continue;
@@ -125,7 +127,7 @@ function handleFileSelect(evt){
                 imageContainer.style.height = "100px";
                 imageContainer.onmousedown = function(){mydragg.startMoving(imageContainer,'sankey-display',event)};
                 imageContainer.onmouseup = function(){mydragg.stopMoving('sankey-display')};
-                imageContainer.style.zIndex = 0;
+                imageContainer.style.zIndex = imageCount;
 
                 var image = document.createElement("img");
 
@@ -213,116 +215,34 @@ function handleFileSelect(evt){
     }
 }
 
-var count;
-
-function reloadImageSpans(){
-
-    d3.selectAll(".image-span").remove();
-
-    count = 0;
-
-    // files is a FileList of File objects. List some properties.
-    for (var i = 0, f; f = fileStorage[i]; i++) {
-        // Only process image files.
-        if (!f.type.match('image.*')) {
-            continue;
-        }
-
-        var reader = new FileReader();
-
-        // Closure to capture the file information.
-        reader.onload = (function(theFile) {
-            return function(e) {
-
-
-                console.log(count);
-
-                var span = document.createElement('span');
-                span.id = "thumb"+imageCount;
-                span.className = "image-span";
-                span.innerHTML = [  '<span class="glyphicon glyphicon-arrow-up" style="font-size: 25px; color: #ff7226; cursor: pointer;" onclick="moveUpImage(' + count + ')"></span>' +
-                '<span class="glyphicon glyphicon-arrow-down" style="font-size: 25px; padding-right: 10px; color: #ff7226; cursor: pointer;" onclick="moveDownImage(' + count + ')"></span>' +
-                '' +
-                '<img class="thumb" src="', e.target.result,
-                    '" title="', escape(theFile.name), '"/><button class="btn btn-secondary btn-pop" title="edit" onclick="removeImage(' + count + ');" style="background-color: #d4161c;"><i class="glyphicon glyphicon-minus"></i></button><br>'].join('');
-
-                document.getElementById('list').insertBefore(span, document.getElementById('list').firstChild);
-
-                count++;
-            };
-        })(f);
-        // Read in the image file as a data URL.
-        reader.readAsDataURL(f);
-    }
-    document.getElementById('sankey-display').addEventListener('change', handleFileSelect, false);
-
-    document.getElementById('selectImageInput').value = "";
-}
-
 
 function moveUpImage(number){
 
-    // var newSpawPosition = number - 1;
-    // var temp = fileStorage[number];
-    //
-    // if(newSpawPosition > -1){
-    //     fileStorage[number] = fileStorage[newSpawPosition];
-    //     fileStorage[newSpawPosition] = temp;
-    // }
 
-    //reloadImages();
+    console.log("moveUpImage");
 
-    console.log("imageContainer" + number);
+    if(document.getElementById("imageContainer" + number).nextSibling != null) {
+        $("#thumb" + number).after($(document.getElementById("thumb" + number).previousSibling));
 
-    if(document.getElementById("imageContainer" + number).style.zIndex < (imageCount-1)){  // if the document can go any higher
-        var elements = document.getElementsByClassName("imageContainer");
-
-        var temp = fileStorage[number+1];
-        if(temp != null){
-            fileStorage[number+1] = fileStorage[number];
-            fileStorage[number] = temp;
-        }
-
-        for(var i = 0; i < elements.length; i++){
-            if(elements[i].id == ("imageContainer" + number)){
-                elements[i].style.zIndex = (parseInt((elements[i].style.zIndex).toString()) + 1).toString();
-            }
-            else{
-                if(elements[i].style.zIndex > 0){
-                    elements[i].style.zIndex = (parseInt((elements[i].style.zIndex).toString()) - 1).toString();
-                }
-            }
-        }
-
-        reloadImageSpans();
+        var temp = document.getElementById("imageContainer" + number).style.zIndex;
+        document.getElementById("imageContainer" + number).style.zIndex = document.getElementById("imageContainer" + number).nextSibling.style.zIndex;
+        document.getElementById("imageContainer" + number).nextSibling.style.zIndex = temp;
+        $("#imageContainer" + number).before($(document.getElementById("imageContainer" + number).nextSibling));
     }
+    //}
 }
 
 function moveDownImage(number){
 
-    console.log("imageContainer" + number);
+    console.log("moveDownImage");
 
-    if(document.getElementById("imageContainer" + number).style.zIndex > 0){  // if the document can go any higher
-        var elements = document.getElementsByClassName("imageContainer");
+    if(document.getElementById("imageContainer" + number).previousSibling != null) {
+        $("#thumb" + number).before($(document.getElementById("thumb" + number).nextSibling));
 
-        var temp = fileStorage[number-1];
-        if(temp != null) {
-            fileStorage[number - 1] = fileStorage[number];
-            fileStorage[number] = temp;
-        }
-
-        for(var i = 0; i < elements.length; i++){
-            if(elements[i].id == ("imageContainer" + number)){
-                elements[i].style.zIndex = (parseInt((elements[i].style.zIndex).toString()) - 1).toString();
-            }
-            else{
-                if(elements[i].style.zIndex < (imageCount-1)) {
-                    elements[i].style.zIndex = (parseInt((elements[i].style.zIndex).toString()) + 1).toString();
-                }
-            }
-        }
-
-        reloadImageSpans();
+        var temp = document.getElementById("imageContainer" + number).style.zIndex;
+        document.getElementById("imageContainer" + number).style.zIndex = document.getElementById("imageContainer" + number).previousSibling.style.zIndex;
+        document.getElementById("imageContainer" + number).previousSibling.style.zIndex = temp;
+        $("#imageContainer" + number).after($(document.getElementById("imageContainer" + number).previousSibling));
     }
 }
 
@@ -348,7 +268,7 @@ var dropZone = document.getElementById('sankey-display');
 dropZone.addEventListener('dragover', handleDragOver, false);
 dropZone.addEventListener('drop', handleFileSelect, false);
 
-var inputBtn = document.getElementById('selectImageInput');
+var inputBtn = document.getElementById('selecltImageInput');
 inputBtn.onclick = addEventListener('change', handleFileSelect, false);
 inputBtn.onchange = addEventListener('change', handleFileSelect, false);
 
