@@ -264,9 +264,9 @@ function handleDragOver(evt) {
 }
 
 // Setup the dnd listeners.
-var dropZone = document.getElementById('sankey-display');
-dropZone.addEventListener('dragover', handleDragOver, false);
-dropZone.addEventListener('drop', handleFileSelect, false);
+// var dropZone = document.getElementById('sankey-display');
+// dropZone.addEventListener('dragover', handleDragOver, false);
+// dropZone.addEventListener('drop', handleFileSelect, false);
 
 var inputBtn = document.getElementById('selectImageInput');
 inputBtn.onclick = addEventListener('change', handleFileSelect, false);
