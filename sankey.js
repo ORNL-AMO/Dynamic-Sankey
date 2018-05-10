@@ -2411,7 +2411,6 @@ function checkForValidSankeyMake(){
 }
 
 function resetSankey(){
-    console.log("HERE");
     $("#sankey-form").remove();
     $("#sankey-display").html('');
     numberOfInputs = 0;
@@ -2427,4 +2426,5 @@ function resetSankey(){
     d3.selectAll(".image-span").remove();
     d3.selectAll(".imageContainer").remove();
     imageCount = 0;
+    document.getElementById("createSankeyBtn").disabled = true;
 }

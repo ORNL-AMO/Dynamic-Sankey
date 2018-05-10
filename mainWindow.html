@@ -120,10 +120,6 @@
 <div class="col-md-12 text-center" id="sandbox" style="padding: 0px;">
     <!--<button id="addSankeyBtn" class='btn btn-secondary pull-left' onclick='makeSankeyForm()' style='display: inline-block; position: relative; z-index: 2; background-color: #7ec783'><span class='glyphicon glyphicon-plus'></span></button>-->
 
-    <div class="text-center noPrint" style="padding-right: 0px; position: relative; z-index: 3; display: inline-block">
-        <button id="createSankeyBtn" class='btn btn-secondary' onclick='makeSankey("#sankey-display", true)' disabled><strong>Create Sankey</strong></button>
-    </div>
-
     <div class="pull-right noPrint" style="padding-right: 0px; position: relative; z-index: 3;">
         <button class='btn btn-secondary pull-right btn-pop' title='delete sankey' onclick="checkForValidClear()" style='background-color: #d4161c;'><i class='glyphicon glyphicon-remove'></i></button>
     </div>
@@ -139,6 +135,11 @@
     <div class="pull-right noPrint" style="padding-right: 0px; position: relative; z-index: 3;">
         <button class='btn btn-secondary pull-right btn-pop' title='edit' onclick='toggleEditingMode()' style='background-color: #dcdcdc;'><i class='glyphicon glyphicon-edit'></i></button>
     </div>
+
+    <div class="text-center noPrint" style="padding-right: 0px;  z-index: 3; display: inline-block; width: 100%; padding-top: 50%">
+        <button id="createSankeyBtn" class='btn btn-secondary' onclick='makeSankey("#sankey-display", true)' disabled><strong>Create Sankey</strong></button>
+    </div>
+
     <!--
     <div class="pull-left noPrint" style="padding-right: 0px; position: relative; z-index: 4; top: 4px;">
         <button class='btn btn-secondary pull-right' title='edit' onclick='toggleEditingMode()' style='background-color: #f2f2f2;'><i class="material-icons">arrow_drop_down_circle</i></button>
