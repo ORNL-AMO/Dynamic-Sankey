@@ -268,7 +268,7 @@ var dropZone = document.getElementById('sankey-display');
 dropZone.addEventListener('dragover', handleDragOver, false);
 dropZone.addEventListener('drop', handleFileSelect, false);
 
-var inputBtn = document.getElementById('selecltImageInput');
+var inputBtn = document.getElementById('selectImageInput');
 inputBtn.onclick = addEventListener('change', handleFileSelect, false);
 inputBtn.onchange = addEventListener('change', handleFileSelect, false);
 
@@ -302,9 +302,11 @@ function makeNodes(){
 
     nodes = [];
 
+    console.log(sequence);
+
     //make input node
     nodes.push({
-        name: "Input",
+        name: sequence[0].name,
         id: "firstInput",
         value: sequence[0].value,
         displaySize: baseSize,
@@ -682,6 +684,8 @@ function makeNodes(){
             lastY: null
         });
     }
+
+    console.log(nodes);
 }
 
 function linkNodes(){
@@ -2157,6 +2161,7 @@ function loadOutputs(){
         }
     }
 
+    updateDifference();
     update();
 
 }
@@ -2181,7 +2186,7 @@ function loadInputs(){
         }
     }
 
-
+    updateDifference();
     update();
 }
 
@@ -2191,6 +2196,8 @@ function updateDifference(){
         name: document.getElementById("differenceTable").childNodes[1].textContent,
         units: document.getElementById("differenceTable").childNodes[5].childNodes[3].value
     };
+
+    console.log(difference);
 
     update();
 }
