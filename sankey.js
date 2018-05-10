@@ -1798,8 +1798,8 @@ function makeSankeyForm(){
         "                                   <input type='text' class='form-control' aria-describedby='basic-addon1' onchange='updateDifference()  style='width: 160px -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;' disabled>" +
         "                               </div>" +
         "                               <div class='input-group'>" +
-        "                                   <span class='input-group-addon' id='basic-addon1'>Units</span>" +
-        "                                   <input type='text' class='form-control' aria-describedby='basic-addon1' onchange='updateDifference()' style='width: 103px'/>" +
+        "                                   <span class='input-group-addon' id='basic-addon1'>Sublabel</span>" +
+        "                                   <input type='text' class='form-control' aria-describedby='basic-addon1' onchange='updateDifference()' style='width: 80px'/>" +
         "                               </div>" +
         "                           </td>" +
         "                       </tr>" +
@@ -1871,13 +1871,13 @@ function addOutput(){
 
     newOutput.innerHTML =   "<h3 id='output-title"+ numberOfOutputs +"' contenteditable='true' onchange='loadOutputs()' style='margin-top: 0px'>" + "Output #" + (numberOfOutputs + 1) + "</h3>" +
         "<div class='input-group'>" +
-        "<input type='text' class='form-control' aria-describedby='basic-addon1' id='outputInput" + numberOfOutputs + " ' onchange='loadOutputs()' style='width: 120px'/>" +
+        "<input type='text' class='form-control' aria-describedby='basic-addon1' id='outputInput" + numberOfOutputs + " ' onchange='loadOutputs()' style='width: 119px'/>" +
         "<span class='input-group-addon' style='margin: 0; padding: 0; border: 0'>" +
         "<button class='btn btn-secondary' onclick='deleteOutput("+numberOfOutputs+")' style='background-color: #8f3236'><span class='glyphicon glyphicon-minus'></span></button>" +
         "</div>" +
         "<div class='input-group'>" +
-        "<span class='input-group-addon' id='basic-addon1'>Units</span>" +
-        "<input type='text' class='form-control' aria-describedby='basic-addon1' id='outputUnits" + numberOfOutputs + " ' onchange='loadOutputs()' style='width: 103px'/>" +
+        "<span class='input-group-addon' id='basic-addon1'>Sublabel</span>" +
+        "<input type='text' class='form-control' aria-describedby='basic-addon1' id='outputUnits" + numberOfOutputs + " ' onchange='loadOutputs()' style='width: 80px'/>" +
         "</div>";
 
     outputs.appendChild(newOutput);
@@ -1925,7 +1925,7 @@ function addSavedOutput(value, units){
         "</div>" +
         "<div class='input-group'>" +
         "<span class='input-group-addon' id='basic-addon1'>Units</span>" +
-        "<input type='text' class='form-control' aria-describedby='basic-addon1' id='outputUnits" + numberOfOutputs + " ' onchange='loadOutputs()' style='width: 103px' value=" + units +" />" +
+        "<input type='text' class='form-control' aria-describedby='basic-addon1' id='outputUnits" + numberOfOutputs + " ' onchange='loadOutputs()' style='width: 80px' value=" + units +" />" +
         "</div>";
 
     outputs.appendChild(newOutput);
@@ -1971,20 +1971,20 @@ function addInput(){
             "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputInput" + numberOfInputs + " ' onchange='loadInputs()'  style='width: 160px -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;' />" +
             "</div>" +
             "<div class='input-group'>" +
-            "<span class='input-group-addon' id='basic-addon1'>Units</span>" +
-            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputUnits" + numberOfOutputs + " ' onchange='loadInputs()' style='width: 103px' />" +
+            "<span class='input-group-addon' id='basic-addon1'>Sublabel</span>" +
+            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputUnits" + numberOfOutputs + " ' onchange='loadInputs()' style='width: 80px' />" +
             "</div>";
     }
     else{
         newInput.innerHTML =    "<h3 id='input-title"+ numberOfInputs +"' contenteditable='true' onchange='loadInputs()' style='margin-top: 0px'>" + "Input #" + (numberOfInputs + 1) + "</h3>" +
             "<div class='input-group'>" +
-            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputInput" + numberOfInputs + " ' onchange='loadInputs()'  style='width: 120px -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;' />" +
+            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputInput" + numberOfInputs + " ' onchange='loadInputs()'  style='width: 119px -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;' />" +
             "<span class='input-group-addon' style='margin: 0; padding: 0; border: 0'>" +
             "<button class='btn btn-secondary' onclick='deleteInput("+numberOfInputs+")' style='background-color: #8f3236'><span class='glyphicon glyphicon-minus'></span></button>" +
             "</div>" +
             "<div class='input-group'>" +
-            "<span class='input-group-addon' id='basic-addon1'>Units</span>" +
-            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputUnits" + numberOfOutputs + " ' onchange='loadInputs()' style='width: 103px' />" +
+            "<span class='input-group-addon' id='basic-addon1'>Sublabel</span>" +
+            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputUnits" + numberOfOutputs + " ' onchange='loadInputs()' style='width: 80px' />" +
             "</div>";
     }
 
@@ -2030,8 +2030,8 @@ function addSavedInput(value, units){
             "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputInput" + numberOfInputs + " ' onchange='loadInputs()'  style='width: 160px -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;' value=" + value +" />" +
             "</div>" +
             "<div class='input-group'>" +
-            "<span class='input-group-addon' id='basic-addon1'>Units</span>" +
-            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputUnits" + numberOfOutputs + " ' onchange='loadInputs()' style='width: 103px' value=" + units +" />" +
+            "<span class='input-group-addon' id='basic-addon1'>Sublabel</span>" +
+            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputUnits" + numberOfOutputs + " ' onchange='loadInputs()' style='width: 80px' value=" + units +" />" +
             "</div>";
     }
     else{
@@ -2042,8 +2042,8 @@ function addSavedInput(value, units){
             "<button class='btn btn-secondary' onclick='deleteInput("+numberOfInputs+")' style='background-color: #8f3236'><span class='glyphicon glyphicon-minus'></span></button>" +
             "</div>" +
             "<div class='input-group'>" +
-            "<span class='input-group-addon' id='basic-addon1'>Units</span>" +
-            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputUnits" + numberOfOutputs + " ' onchange='loadInputs()' style='width: 103px' value=" + units +" />" +
+            "<span class='input-group-addon' id='basic-addon1'>Sublabel</span>" +
+            "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputUnits" + numberOfOutputs + " ' onchange='loadInputs()' style='width: 80px' value=" + units +" />" +
             "</div>";
     }
 
@@ -2053,7 +2053,7 @@ function addSavedInput(value, units){
 
     var newSpanner = document.createElement("td");
     newSpanner.setAttribute("id", "input-spanner"+numberOfInputs);
-    newSpanner.style.width = "157px";
+    newSpanner.style.width = "160px";
 
     outputs.appendChild(newSpanner);
 
