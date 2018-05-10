@@ -1513,6 +1513,7 @@ function makeSankey(location, isNewSankey) {
                 nodeHandles = [];
             }
             document.getElementById("createSankeyBtn").style.display = "none";
+            document.getElementById("createSankeyBtn-div").style.paddingTop = "0px";
         }
         updateSankeySVG();
         updateNodeHandles();
@@ -2427,4 +2428,5 @@ function resetSankey(){
     d3.selectAll(".imageContainer").remove();
     imageCount = 0;
     document.getElementById("createSankeyBtn").disabled = true;
+    document.getElementById("createSankeyBtn-div").style.paddingTop = "50%";
 }
