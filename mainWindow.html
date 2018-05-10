@@ -93,8 +93,8 @@
     <div class="dropdown pull-left noPrint">
         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="width: 40px; height: 40px; background-color: #ffffff; border: 0;" title="menu"><i class="material-icons" style="position: relative; left: -5px; color: #20181f;">menu</i></button>
         <ul class="dropdown-menu">
-            <li><a id="saveSelect" tabindex="-1" onclick='saveSankey("saveSelect")' style="cursor: pointer;">Save</a></li>
-            <li><a id="importBtn" tabindex="-1" style="cursor: pointer;">Open</a></li>
+            <!--<li><a id="saveSelect" tabindex="-1" onclick='saveSankey("saveSelect")' style="cursor: pointer;">Save</a></li>-->
+            <!--<li><a id="importBtn" tabindex="-1" style="cursor: pointer;">Open</a></li>-->
             <li><a tabindex="-1" onclick='toggleEditingMode()' style="cursor: pointer;">Edit</a></li>
             <li><a tabindex="-1" onclick='window.print()' style="cursor: pointer;">Print</a></li>
             <li><a tabindex="-1" data-toggle="modal" data-target="#helpModal" style="cursor: pointer;">Help</a></li>
@@ -250,14 +250,6 @@
     <div id="sankey-display"  name="files[]" multiple>
     </div>
 
-    <div id="contextMenu" class="dropdown clearfix">
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
-            <li><a tabindex="-1" onclick='bringToFront()'>Bring to Front</a></li>
-            <li><a tabindex="-1" onclick='stepForward()'>Step Forward</a></li>
-            <li><a tabindex="-1" onclick='stepBackwards()'>Step Backwards</a></li>
-            <li><a tabindex="-1" onclick='sendToBack()'>Send to Back</a></li>
-        </ul>
-    </div>
 
     <!--<div id="elem" onmousedown='mydragg.startMoving(this,"sankey-display",event);' onmouseup='mydragg.stopMoving("sankey-display");' style="width: 200px;height: 100px;"></div>-->
 </div>
