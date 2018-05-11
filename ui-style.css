@@ -40,28 +40,6 @@ html body{
 }
 
 @font-face {
-    font-family: Cobert;
-    src: url(./assets/fonts/Corbert_Cond_Ital/CorbertCondensed-Italic.otf);
-}
-
-@font-face {
-    font-family: Cobert;
-    font-weight: bold;
-    src: url(./assets/fonts/Corbert_Cond_Ital/CorbertCondensed-Italic.otf);
-}
-
-@font-face {
-    font-family: Aileron;
-    src: url(./assets/fonts/Aileron/Aileron-Regular.otf);
-}
-
-@font-face {
-    font-family: Aileron;
-    font-weight: bold;
-    src: url(./assets/fonts/Aileron/Aileron-HeavyItalic.otf);
-}
-
-@font-face {
     font-family: Bebas Neue;
     src: url(./assets/fonts/BebasNeue/BebasNeueRegular.otf);
 }
