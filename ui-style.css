@@ -17,15 +17,6 @@ html body{
     text-align: center;
 }
 
-#doe-banner{
-    width: 302px;
-    height: 76px;
-    background: url("./assets/banners/DOE.png");
-    background-size: 302px 76px;
-    background-repeat: no-repeat;
-    position: absolute;
-}
-
 #header-row .container-fluid .row #banner #banner-title{
     color: rgba(255, 30, 28, 0.97);
     font-size: 45px;
