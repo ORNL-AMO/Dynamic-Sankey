@@ -23,20 +23,19 @@
     <div class="container-fluid align-middle">
         <div class="row">
             <div class="col-xs-12 " id="banner">
-                <div id="doe-banner"></div>
 
-                <h1  id="banner-title" class="pull-right" style="position: relative; top: 4px;">
+                <h1  id="banner-title" class="pull-left" style="position: relative; top: 4px;">
                     <b>Dynamic Sankey</b>
                 </h1>
 
-                <svg class="pull-right arrow" height="76" width="70" style="position: relative;">
+                <svg class="pull-left arrow" height="76" width="70" style="position: relative;">
                     <polygon points="20,6 20,70 52,38" style="fill:#ff0100; stroke:#ff0100; stroke-width:1" />
                 </svg>
-                <svg class="pull-right arrow" height="76" width="52" style="position: relative; left: 10;">
+                <svg class="pull-left arrow" height="76" width="52" style="position: relative; right: 20;">
                     <polygon points="20,6 20,70 52,38" style="fill:#fff300; stroke:#fff300; stroke-width:1" />
                 </svg>
 
-                <svg class="pull-right arrow" height="76" width="52" style="position: relative; left: 20;">
+                <svg class="pull-left arrow" height="76" width="52" style="position: relative; right: 20;">
                     <polygon points="20,6 20,70 52,38" style="fill:#0bff00; stroke:#0bff00;stroke-width:1" />
                 </svg>
 
@@ -165,6 +164,7 @@
                                 color: "#FFFFFF"
                             });
                             $("#canvasColorPalette").change( function(){
+                                $("#sandbox").css("background-color", $("#canvasColorPalette").spectrum("get").toHexString());
                                 $("#sankey-display").css("background-color", $("#canvasColorPalette").spectrum("get").toHexString());
                             });
                         </script>

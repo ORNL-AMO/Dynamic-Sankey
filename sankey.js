@@ -145,7 +145,7 @@ function handleFileSelect(evt){
 
                 var resizer = document.createElement('div');
                 resizer.className = 'resizer';
-                resizer.style.backgroundColor = "#303336";
+                resizer.style.backgroundColor = "#34ff00";
                 resizer.style.width = "10px";
                 resizer.style.height = "10px";
                 resizer.style.right = "0px";
@@ -180,15 +180,6 @@ function handleFileSelect(evt){
 
                 document.getElementById("sankey-display").appendChild(imageContainer);
 
-                //document.getElementById("sankey-display").style.backgroundImage = "url('" + e.target.result + "')";
-
-                // Render thumbnail.
-                // var span = document.createElement('span');
-                // span.id = "thumb"+imageCount;
-                // span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                //                         '" title="', escape(theFile.name), '"/><button class="btn btn-secondary btn-pop" title="edit" onclick="removeImage(' + imageCount + ');" style="background-color: #d4161c;"><i class="glyphicon glyphicon-minus"></i></button><br>'].join('');
-                // document.getElementById('list').insertBefore(span, null);
-
                 var span = document.createElement('span');
                 span.id = "thumb"+imageCount;
                 span.className = "image-span";
@@ -199,7 +190,6 @@ function handleFileSelect(evt){
                                         '" title="', escape(theFile.name), '"/><button class="btn btn-secondary btn-pop" title="edit" onclick="removeImage(' + imageCount + ');" style="background-color: #d4161c;"><i class="glyphicon glyphicon-minus"></i></button><br>'].join('');
 
                 document.getElementById('list').insertBefore(span, document.getElementById('list').firstChild);
-
 
                 imageCount++;
             };
@@ -218,9 +208,6 @@ function handleFileSelect(evt){
 
 function moveUpImage(number){
 
-
-    console.log("moveUpImage");
-
     if(document.getElementById("imageContainer" + number).nextSibling != null) {
         $("#thumb" + number).after($(document.getElementById("thumb" + number).previousSibling));
 
@@ -229,12 +216,9 @@ function moveUpImage(number){
         document.getElementById("imageContainer" + number).nextSibling.style.zIndex = temp;
         $("#imageContainer" + number).before($(document.getElementById("imageContainer" + number).nextSibling));
     }
-    //}
 }
 
 function moveDownImage(number){
-
-    console.log("moveDownImage");
 
     if(document.getElementById("imageContainer" + number).previousSibling != null) {
         $("#thumb" + number).before($(document.getElementById("thumb" + number).nextSibling));
@@ -243,6 +227,30 @@ function moveDownImage(number){
         document.getElementById("imageContainer" + number).style.zIndex = document.getElementById("imageContainer" + number).previousSibling.style.zIndex;
         document.getElementById("imageContainer" + number).previousSibling.style.zIndex = temp;
         $("#imageContainer" + number).after($(document.getElementById("imageContainer" + number).previousSibling));
+    }
+}
+
+function moveUpSankey(number){
+
+    if(document.getElementById("sankey-svg").nextSibling != null) {
+        $("#thumb" + number).after($(document.getElementById("thumb" + number).previousSibling));
+
+        var temp = document.getElementById("sankey-svg").style.zIndex;
+        document.getElementById("sankey-svg").style.zIndex = document.getElementById("sankey-svg").nextSibling.style.zIndex;
+        document.getElementById("sankey-svg").nextSibling.style.zIndex = temp;
+        $("#sankey-svg").before($(document.getElementById("sankey-svg").nextSibling));
+    }
+}
+
+function moveDownSankey(number){
+
+    if(document.getElementById("sankey-svg").previousSibling != null) {
+        $("#thumb" + number).before($(document.getElementById("thumb" + number).nextSibling));
+
+        var temp = document.getElementById("sankey-svg").style.zIndex;
+        document.getElementById("sankey-svg").style.zIndex = document.getElementById("sankey-svg").previousSibling.style.zIndex;
+        document.getElementById("sankey-svg").previousSibling.style.zIndex = temp;
+        $("#sankey-svg").after($(document.getElementById("sankey-svg").previousSibling));
     }
 }
 
@@ -297,12 +305,9 @@ function stopDrag(e) {
 }
 
 function makeNodes(){
-
     loadSequence();
 
     nodes = [];
-
-    console.log(sequence);
 
     //make input node
     nodes.push({
@@ -684,8 +689,6 @@ function makeNodes(){
             lastY: null
         });
     }
-
-    console.log(nodes);
 }
 
 function linkNodes(){
@@ -865,14 +868,12 @@ function initDifference(){
 }
 
 var zoom = d3.zoom()
-    .scaleExtent([.25, 100])
     .on("zoom", zoomed);
 
 
 var lastTransformX = 1;
 var lastTransformY = 1;
 var lastTransformK = 1;
-
 
 function zoomed() {
 
@@ -908,7 +909,7 @@ function makeSankeySVG(location){
         .attr("id", "sankey-svg")
         .style("position", "relative")
         .style("top", "-34px")
-        .style("z-index", "0")
+        .style("z-index", imageCount)
         .call(zoom)
         .append("g");
 }
@@ -1741,6 +1742,19 @@ function makeSankey(location, isNewSankey) {
     increaseOfInputsOrOutputs = false;
     lastLength = nodes.length;
     sankeyIsMade = true;
+
+    console.log(imageCount);
+    var span = document.createElement('span');
+    span.id = "thumb"+imageCount;
+    span.className = "image-span";
+    span.innerHTML = [  '<span class="glyphicon glyphicon-arrow-up" style="font-size: 25px; color: #ff7226; cursor: pointer;" onclick="moveUpSankey(' + imageCount + ')"></span>' +
+    '<span class="glyphicon glyphicon-arrow-down" style="font-size: 25px; padding-right: 10px; color: #ff7226; cursor: pointer;" onclick="moveDownSankey(' + imageCount + ')"></span>' +
+    '' +
+    '<img class="thumb" src="assets/images/sankey_placeholder.png" style="height: 20px"/><br>'].join('');
+
+    document.getElementById('list').insertBefore(span, document.getElementById('list').firstChild);
+
+    imageCount++;
 }
 
 function makeSankeyForm(){
@@ -2197,8 +2211,6 @@ function updateDifference(){
         name: document.getElementById("differenceTable").childNodes[1].textContent,
         units: document.getElementById("differenceTable").childNodes[5].childNodes[3].value
     };
-
-    console.log(difference);
 
     update();
 }

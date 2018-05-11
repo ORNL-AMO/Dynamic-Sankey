@@ -17,15 +17,6 @@ html body{
     text-align: center;
 }
 
-#doe-banner{
-    width: 302px;
-    height: 76px;
-    background: url("./assets/banners/DOE.png");
-    background-size: 302px 76px;
-    background-repeat: no-repeat;
-    position: absolute;
-}
-
 #header-row .container-fluid .row #banner #banner-title{
     color: rgba(255, 30, 28, 0.97);
     font-size: 45px;
@@ -37,28 +28,6 @@ html body{
 
 .arrow{
     filter: drop-shadow( -8px 0 2px hsla(0, 0%, 0%, 0.2));
-}
-
-@font-face {
-    font-family: Cobert;
-    src: url(./assets/fonts/Corbert_Cond_Ital/CorbertCondensed-Italic.otf);
-}
-
-@font-face {
-    font-family: Cobert;
-    font-weight: bold;
-    src: url(./assets/fonts/Corbert_Cond_Ital/CorbertCondensed-Italic.otf);
-}
-
-@font-face {
-    font-family: Aileron;
-    src: url(./assets/fonts/Aileron/Aileron-Regular.otf);
-}
-
-@font-face {
-    font-family: Aileron;
-    font-weight: bold;
-    src: url(./assets/fonts/Aileron/Aileron-HeavyItalic.otf);
 }
 
 @font-face {
