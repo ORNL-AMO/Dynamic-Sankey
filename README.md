@@ -19,6 +19,8 @@ npm install
 npm start
 ```
 
+Once the program is running, start making the sankey by first making an initial input by clicking on the plus button next to the input row. From there one can make more inputs, outputs, and delete both as needed. An editing feature is accessed by either selecting it from the menu, or clicking the canvas tag in the canvas.
+
 ## License
 
 [MIT](LICENSE.md)
