@@ -1,6 +1,7 @@
+## License  
 Copyright 2018, UT-Battelle, LLC  
 All rights reserved  
- Dyanmic Sankey  
+ Dynamic Sankey  
 OPEN SOURCE LICENSE (Permissive)  
 
 Subject to the conditions of this License, UT-Battelle, LLC (the “Licensor”) hereby grants, free of charge, to any person (the 
