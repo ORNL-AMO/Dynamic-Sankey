@@ -183,11 +183,11 @@ function handleFileSelect(evt){
                 var span = document.createElement('span');
                 span.id = "thumb"+imageCount;
                 span.className = "image-span";
-                span.innerHTML = [  '<span class="glyphicon glyphicon-arrow-up" style="font-size: 25px; color: #ff7226; cursor: pointer;" onclick="moveUpImage(' + imageCount + ')"></span>' +
-                                    '<span class="glyphicon glyphicon-arrow-down" style="font-size: 25px; padding-right: 10px; color: #ff7226; cursor: pointer;" onclick="moveDownImage(' + imageCount + ')"></span>' +
+                span.innerHTML = [  '<i class="material-icons" style="font-size: 25px; color: #ff7226; cursor: pointer;" onclick="moveUpImage(' + imageCount + ')">arrow_upward</i>' +
+                                    '<i class="material-icons" style="font-size: 25px; padding-right: 10px; color: #ff7226; cursor: pointer;" onclick="moveDownImage(' + imageCount + ')">arrow_downward</i>' +
                                     '' +
                                     '<img class="thumb" src="', e.target.result,
-                                        '" title="', escape(theFile.name), '"/><button class="btn btn-secondary btn-pop" title="edit" onclick="removeImage(' + imageCount + ');" style="background-color: #d4161c;"><i class="glyphicon glyphicon-minus"></i></button><br>'].join('');
+                                        '" title="', escape(theFile.name), '"/><button class="btn btn-secondary btn-pop" title="edit" onclick="removeImage(' + imageCount + ');" style="background-color: #d4161c;"><i class="material-icons">remove</i></button><br>'].join('');
 
                 document.getElementById('list').insertBefore(span, document.getElementById('list').firstChild);
 
@@ -1747,8 +1747,8 @@ function makeSankey(location, isNewSankey) {
     var span = document.createElement('span');
     span.id = "thumb"+imageCount;
     span.className = "image-span";
-    span.innerHTML = [  '<span class="glyphicon glyphicon-arrow-up" style="font-size: 25px; color: #ff7226; cursor: pointer;" onclick="moveUpSankey(' + imageCount + ')"></span>' +
-    '<span class="glyphicon glyphicon-arrow-down" style="font-size: 25px; padding-right: 10px; color: #ff7226; cursor: pointer;" onclick="moveDownSankey(' + imageCount + ')"></span>' +
+    span.innerHTML = [  '<i class="material-icons" style="font-size: 25px; color: #ff7226; cursor: pointer;" onclick="moveUpSankey(' + imageCount + ')">arrow_upward</i>' +
+    '<i class="material-icons" style="font-size: 25px; padding-right: 10px; color: #ff7226; cursor: pointer;" onclick="moveDownSankey(' + imageCount + ')">arrow_downward</i>' +
     '' +
     '<img class="thumb" src="assets/images/sankey_placeholder.png" style="height: 20px"/><br>'].join('');
 
@@ -1772,8 +1772,8 @@ function makeSankeyForm(){
         "                                                   box-shadow: 0px 3px 4px 0px rgba(0,0,0,0.5);" +
         "                                                   z-index: 4;" +
         "                                                   height: 100%;'>" +
-        "<div id='sankey-details' class='row' style='padding-top: 5px; height: 100%;'>" +
-        "           <div class='row' style='padding-top: 0px; apdding-bottom: 0px; padding-left: 20px; padding-right: 20px; overflow: scroll; overflow-y: hidden;'> " +
+        "<div id='sankey-details' class='col-12' style='padding-top: 5px; height: 100%; width: 100%;'>" +
+        "           <div class='row' style='padding-top: 0px; padding-bottom: 0px; padding-left: 20px; padding-right: 20px; overflow: scroll; overflow-y: hidden;'> " +
         "               <div style='width: 120px;  display: inline-block;'>" +
         "                   <table class='table table-bordered' style='margin: 0px;'>" +
         "                       <tbody>" +
@@ -1781,7 +1781,7 @@ function makeSankeyForm(){
         "                               <td style='width:120px' class='text-center'>" +
         "                                   <h3 style='margin-top: 5px'>Input</h3>" +
         "                                   <div class='text-center'>" +
-        "                                       <button class='btn btn-secondary btn-pop' onclick='addInput()' style='background-color: #7ec783'><span class='glyphicon glyphicon-plus'></span></button>" +
+        "                                       <button class='btn btn-secondary btn-pop' onclick='addInput()' style='background-color: #7ec783'><i class='material-icons' style='color: black;'>add</i></button>" +
         "                                       <div style='width: 90px; padding-top: 10px;' >" +
         "                                           <i class='material-icons' style='position: relative; top: 5px'>palette</i>" +
         "                                           <input id='colorPaletteInput' style='padding-top: 10px;' />" +
@@ -1793,7 +1793,7 @@ function makeSankeyForm(){
         "                               <td style='width:120px' class='text-center'>" +
         "                                  <h3 style='margin-top: 5px'>Output</h3>" +
         "                                   <div class='text-center'>" +
-        "                                       <button class='btn btn-secondary btn-pop' onclick='addOutput()' style='background-color: #7ec783'><span class='glyphicon glyphicon-plus'></span></button>" +
+        "                                       <button class='btn btn-secondary btn-pop' onclick='addOutput()' style='background-color: #7ec783'><i class='material-icons' style='color: black;'>add</i></button>" +
         "                                       <div style='width: 90px; padding-top: 10px;' >" +
         "                                           <i class='material-icons' style='position: relative; top: 5px'>palette</i>" +
         "                                           <input id='colorPaletteOutput' style='padding-top: 10px;' />" +
@@ -1888,7 +1888,7 @@ function addOutput(){
         "<div class='input-group'>" +
         "<input type='text' class='form-control' aria-describedby='basic-addon1' id='outputInput" + numberOfOutputs + " ' onchange='loadOutputs()' style='width: 119px'/>" +
         "<span class='input-group-addon' style='margin: 0; padding: 0; border: 0'>" +
-        "<button class='btn btn-secondary' onclick='deleteOutput("+numberOfOutputs+")' style='background-color: #8f3236'><span class='glyphicon glyphicon-minus'></span></button>" +
+        "<button class='btn btn-secondary' onclick='deleteOutput("+numberOfOutputs+")' style='background-color: #8f3236'><i class='material-icons'>remove</i></button>" +
         "</div>" +
         "<div class='input-group'>" +
         "<span class='input-group-addon' id='basic-addon1'>Sublabel</span>" +
@@ -1936,7 +1936,7 @@ function addSavedOutput(value, units){
         "<div class='input-group'>" +
         "<input type='text' class='form-control' aria-describedby='basic-addon1' id='outputInput" + numberOfOutputs + " ' onchange='loadOutputs()' style='width: 120px' value=" + value +" />" +
         "<span class='input-group-addon' style='margin: 0; padding: 0; border: 0'>" +
-        "<button class='btn btn-secondary' onclick='deleteOutput("+numberOfOutputs+")' style='background-color: #8f3236'><span class='glyphicon glyphicon-minus'></span></button>" +
+        "<button class='btn btn-secondary' onclick='deleteOutput("+numberOfOutputs+")' style='background-color: #8f3236'><i class='material-icons'>remove</i></button>" +
         "</div>" +
         "<div class='input-group'>" +
         "<span class='input-group-addon' id='basic-addon1'>Units</span>" +
@@ -1995,7 +1995,7 @@ function addInput(){
             "<div class='input-group'>" +
             "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputInput" + numberOfInputs + " ' onchange='loadInputs()'  style='width: 119px -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;' />" +
             "<span class='input-group-addon' style='margin: 0; padding: 0; border: 0'>" +
-            "<button class='btn btn-secondary' onclick='deleteInput("+numberOfInputs+")' style='background-color: #8f3236'><span class='glyphicon glyphicon-minus'></span></button>" +
+            "<button class='btn btn-secondary' onclick='deleteInput("+numberOfInputs+")' style='background-color: #8f3236'><i class='material-icons'>remove</i></button>" +
             "</div>" +
             "<div class='input-group'>" +
             "<span class='input-group-addon' id='basic-addon1'>Sublabel</span>" +
@@ -2054,7 +2054,7 @@ function addSavedInput(value, units){
             "<div class='input-group'>" +
             "<input type='text' class='form-control' aria-describedby='basic-addon1' id='inputInput" + numberOfInputs + " ' onchange='loadInputs()'  style='width: 120px -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;' value=" + value +" />" +
             "<span class='input-group-addon' style='margin: 0; padding: 0; border: 0'>" +
-            "<button class='btn btn-secondary' onclick='deleteInput("+numberOfInputs+")' style='background-color: #8f3236'><span class='glyphicon glyphicon-minus'></span></button>" +
+            "<button class='btn btn-secondary' onclick='deleteInput("+numberOfInputs+")' style='background-color: #8f3236'><i class='material-icons'>remove</i></button>" +
             "</div>" +
             "<div class='input-group'>" +
             "<span class='input-group-addon' id='basic-addon1'>Sublabel</span>" +

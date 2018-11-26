@@ -22,24 +22,23 @@
 <div class="header-row context noPrint" id="header-row" style="z-index: +5;">
     <div class="container-fluid align-middle">
         <div class="row">
-            <div class="col-xs-12 " id="banner">
+            <div class="col-12 " id="banner">
 
-                <h1  id="banner-title" class="pull-left" style="position: relative; top: 4px;">
+                <h1  id="banner-title" class="float-left" style="position: relative; top: 4px;">
                     <b>Dynamic Sankey</b>
                 </h1>
 
-                <svg class="pull-left arrow" height="76" width="70" style="position: relative;">
+                <svg class="float-left arrow" height="76" width="70" style="position: relative;">
                     <polygon points="20,6 20,70 52,38" style="fill:#ff0100; stroke:#ff0100; stroke-width:1" />
                 </svg>
-                <svg class="pull-left arrow" height="76" width="52" style="position: relative; right: 20;">
+                <svg class="float-left arrow" height="76" width="52" style="position: relative; right: 20;">
                     <polygon points="20,6 20,70 52,38" style="fill:#fff300; stroke:#fff300; stroke-width:1" />
                 </svg>
 
-                <svg class="pull-left arrow" height="76" width="52" style="position: relative; right: 20;">
+                <svg class="float-left arrow" height="76" width="52" style="position: relative; right: 20;">
                     <polygon points="20,6 20,70 52,38" style="fill:#0bff00; stroke:#0bff00;stroke-width:1" />
                 </svg>
 
-                <!--<button type="button" class="btn btn-default btn-circle pull-right btn-lg" title='help' data-toggle="modal" data-target="#helpModal" style="position: relative; top: 25%"><span class="glyphicon glyphicon-question-sign" style="top:-12px; left: -19px; font-size: 55px"></span></button>-->
             </div>
         </div>
     </div>
@@ -51,8 +50,8 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="float-left modal-title text-center">About</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title text-center">About</h4>
             </div>
             <div class="modal-body">
                 <p>A Sankey diagram is a type of flow diagram where the width of the arrows is proportion to the flow quantity. Sankey diagrams are often used to represent primary energy flow in and out of a system, while illustrating losses, recovery streams, the final useful energy.</p>
@@ -89,7 +88,7 @@
 
 <div id="title-row">
 
-    <div class="dropdown pull-left noPrint">
+    <div class="dropdown float-left noPrint">
         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="width: 40px; height: 40px; background-color: #ffffff; border: 0;" title="menu"><i class="material-icons" style="position: relative; left: -5px; color: #20181f;">menu</i></button>
         <ul class="dropdown-menu">
             <!--<li><a id="saveSelect" tabindex="-1" onclick='saveSankey("saveSelect")' style="cursor: pointer;">Save</a></li>-->
@@ -107,8 +106,8 @@
         });
     </script>
 
-    <div class="dropdown pull-right noPrint">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="modal" data-target="#helpModal" style="width: 40px; height: 40px; background-color: #ffffff; border: 0;" title="help"><i class="glyphicon glyphicon-question-sign" style="position: relative; font-size: 25px; color: #20181f;"></i></button>
+    <div class="dropdown float-right noPrint">
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="modal" data-target="#helpModal" style="width: 40px; height: 40px; background-color: #ffffff; border: 0;" title="help"><i class="material-icons" style="position: relative; font-size: 25px; color: #20181f;">help</i></button>
     </div>
 
 </div>
@@ -116,23 +115,23 @@
 <div id="detailScreen" class="noPrint">
 </div>
 
-<div class="col-md-12 text-center" id="sandbox" style="padding: 0px;">
+<div class="col-12 text-center" id="sandbox" style="padding: 0px;">
     <!--<button id="addSankeyBtn" class='btn btn-secondary pull-left' onclick='makeSankeyForm()' style='display: inline-block; position: relative; z-index: 2; background-color: #7ec783'><span class='glyphicon glyphicon-plus'></span></button>-->
 
-    <div class="pull-right noPrint" style="padding-right: 0px; position: relative; z-index: 3;">
-        <button class='btn btn-secondary pull-right btn-pop' title='delete sankey' onclick="checkForValidClear()" style='background-color: #d4161c;'><i class='glyphicon glyphicon-remove'></i></button>
+    <div class="float-right noPrint" style="padding-right: 0px; position: relative; z-index: 3;">
+        <button class='btn btn-secondary float-right btn-pop' title='delete sankey' onclick="checkForValidClear()" style='background-color: #d4161c;'><i class='material-icons sankey-option-icons'>close</i></button>
     </div>
-    <div class="pull-right noPrint" style="padding-right: 0px;  position: relative; z-index: 3;">
-        <button  class='btn btn-secondary btn-pop' title='sankey settings' type="button" data-toggle="modal" data-target="#canvasSettingsModal" style='display: inline-block; background-color: #d9d9db; width: 40px; height: 34px'><i class="glyphicon glyphicon-cog"></i></button>
+    <div class="float-right noPrint" style="padding-right: 0px;  position: relative; z-index: 3;">
+        <button class='btn btn-secondary float-right btn-pop' title='sankey settings' type="button" data-toggle="modal" data-target="#canvasSettingsModal" style='display: inline-block; background-color: #d9d9db;'><i class="material-icons sankey-option-icons">settings</i></button>
     </div>
-    <div class="pull-right noPrint" style="padding-right: 0px; position: relative; z-index: 3;">
-        <button  class='btn btn-secondary btn-pop' title='import images' type="button" data-toggle="modal" data-target="#importImagesModal" style='display: inline-block; background-color: #d9d9db;'><span class='glyphicon glyphicon-picture'></span></button>
+    <div class="float-right noPrint" style="padding-right: 0px; position: relative; z-index: 3;">
+        <button  class='btn btn-secondary float-right btn-pop' title='import images' type="button" data-toggle="modal" data-target="#importImagesModal" style='display: inline-block; background-color: #d9d9db;'><i class='material-icons sankey-option-icons'>panorama</i></button>
     </div>
-    <div class="pull-right noPrint" style="padding-right: 0px; position: relative; z-index: 3;">
-        <button class='btn btn-secondary pull-right btn-pop' title='recenter and resize' onclick='recenterAndResize()' style='background-color: #dcdcdc;'><i class="glyphicon glyphicon-screenshot"></i></button>
+    <div class="float-right noPrint" style="padding-right: 0px; position: relative; z-index: 3;">
+        <button class='btn btn-secondary float-right btn-pop' title='recenter and resize' onclick='recenterAndResize()' style='background-color: #dcdcdc;'><i class="material-icons sankey-option-icons">center_focus_strong</i></button>
     </div>
-    <div class="pull-right noPrint" style="padding-right: 0px; position: relative; z-index: 3;">
-        <button class='btn btn-secondary pull-right btn-pop' title='edit' onclick='toggleEditingMode()' style='background-color: #dcdcdc;'><i class='glyphicon glyphicon-edit'></i></button>
+    <div class="float-right noPrint" style="padding-right: 0px; position: relative; z-index: 3;">
+        <button class='btn btn-secondary float-right btn-pop' title='edit' onclick='toggleEditingMode()' style='background-color: #dcdcdc;'><i class='material-icons sankey-option-icons'>edit</i></button>
     </div>
 
     <div id="createSankeyBtn-div" class="text-center noPrint" style="padding-right: 0px;  z-index: 3; display: inline-block; width: 100%; padding-top: 100px">
@@ -158,7 +157,7 @@
                 <div class="modal-body">
                     <div class="row" style="padding: 10px;">
 
-                        <input id="canvasColorPalette"  class="pull-right"/>
+                        <input id="canvasColorPalette"  class="float-right"/>
                         <script>
                             $("#canvasColorPalette").spectrum({
                                 color: "#FFFFFF"

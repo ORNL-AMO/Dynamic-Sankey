@@ -214,3 +214,8 @@ imageContainer.resizer {
         width: 100%;
     }
 }
+
+.sankey-option-icons {
+    color: black;
+    font-size: 12px;
+}

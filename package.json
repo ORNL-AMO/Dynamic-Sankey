@@ -13,7 +13,7 @@
   "author": "Michael Whitmer",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^4.1.3",
     "d3": "4.12.2 ",
     "electron": "^1.7.9",
     "jquery": "^3.2.1",
